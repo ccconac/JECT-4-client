@@ -8,6 +8,10 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate', // 서비스 워커 자동 업데이트
+      // 개발 모드에서도 Service Worker + Manifest 등록
+      devOptions: {
+        enabled: true,
+      },
       injectRegister: 'auto', // 서비스 워커 자동 등록
       manifest: {
         name: 'PLOG',
