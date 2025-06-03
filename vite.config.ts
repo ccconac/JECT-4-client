@@ -4,6 +4,9 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    host: '0.0.0.0', // 외부 디바이스 접속 설정
+  },
   plugins: [
     react(),
     VitePWA({
@@ -13,6 +16,7 @@ export default defineConfig({
         enabled: true,
       },
       injectRegister: 'auto', // 서비스 워커 자동 등록
+
       manifest: {
         name: 'PLOG',
         short_name: 'PLOG',
