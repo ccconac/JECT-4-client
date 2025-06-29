@@ -83,7 +83,7 @@ src/
     └── pomodoro-timer/ # 뽀모도로 타이머
 ```
 
-## Feature-Sliced Design 아키텍쳐 적용
+### Feature-Sliced Design 아키텍쳐 적용
 
 - 도메인별로 `entities` 폴더에서 비즈니스 로직 관리 (api, model, ui 분리)
 - 기능별로 `features` 폴더에서 UI와 로직 결합
