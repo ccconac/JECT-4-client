@@ -1,0 +1,53 @@
+@import 'tailwindcss';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+body {
+    font-family: var(--font-pre);
+}
+
+@theme {
+    --font-pre: 'Pretendard', sans-serif;
+
+    /*typography*/
+
+    /*제목1: 화면 제목*/
+    --text-display: 32px;
+    --text-display--line-height: 44px;
+    --text-display--font-weight: 700;
+
+    /*제목2: 섹션 제목*/
+    --text-title: 24px;
+    --text-title--line-height: 36px;
+    --text-title--font-weight: 600;
+
+    /*소제목1: 소제목*/
+    --text-subtitle: 20px;
+    --text-subtitle--line-height: 30px;
+    --text-subtitle--font-weight: 700;
+
+    /*내용1: 본문 텍스트*/
+    --text-body: 16px;
+    --text-body--line-height: 24px;
+    --text-body--font-weight: 400;
+
+    /*내용2: 본문 텍스트*/
+    --text-small: 14px;
+    --text-small--line-height: 20px;
+    --text-small--font-weight: 400;
+
+    /*내용3: 날짜/설명*/
+    --text-caption: 12px;
+    --text-caption--line-height: 18px;
+    --text-caption--font-weight: 400;
+
+    /*color*/
+    --color-primary: #6fc8be;
+    --color-secondary: #364b59;
+    --color-background: #fff8e9;
+    --color-point1: #f0816d;
+    --color-point2: #f8be66;
+    --color-text-sub: #895c41;
+    --color-text-min: #757575;
+    --color-dim: #f8f7f5;
+    --color-dim-variant: #eaeaea;
+}
