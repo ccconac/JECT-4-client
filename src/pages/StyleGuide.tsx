@@ -1,13 +1,9 @@
-export default function TestComponent() {
+export default function StyleGuide() {
     return (
         <div className="min-h-screen bg-gray-50 p-8">
             {/* 메인 헤더 섹션 */}
             <section className="from-primary-500 to-primary-600 mb-12 rounded-lg bg-gradient-to-r p-12 text-center">
-                <h1 className="text-display mb-4 text-white">StudyTrip과 함께하는 특별한 여행</h1>
-                <p className="text-title text-primary-50 mb-6">새로운 경험과 학습이 기다립니다</p>
-                <button className="text-primary-600 text-body rounded-lg bg-white px-8 py-3 font-semibold transition-colors hover:bg-gray-50">
-                    여행 시작하기
-                </button>
+                <h1 className="text-display mb-4 text-gray-900">디자인 토큰 가이드</h1>
             </section>
 
             {/* 타이포그래피 테스트 섹션 */}
@@ -65,31 +61,35 @@ export default function TestComponent() {
                         <h3 className="text-subtitle mb-4 text-gray-800">Basic Colors</h3>
                         <div className="space-y-2">
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-primary">primary-50</span>
+                                <span className="text-small text-primary">primary #6FC8BE</span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-secondary">primary-100</span>
+                                <span className="text-small text-secondary">secondary #364B59</span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-background">primary-500</span>
+                                <span className="text-small text-background">
+                                    background #FFF8E9
+                                </span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-point1">primary-600</span>
+                                <span className="text-small text-point1">point-1 #F0816D</span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-point2">primary-900</span>
+                                <span className="text-small text-point2">point-2 #F8BE66</span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-text-sub">primary-900</span>
+                                <span className="text-small text-text-sub">text-sub #895C41</span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-text-min">primary-900</span>
+                                <span className="text-small text-text-min">text-min #757575</span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-dim">primary-900</span>
+                                <span className="text-small text-dim">dim #F8F7F5</span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <span className="text-small text-dim-variant">primary-900</span>
+                                <span className="text-small text-dim-variant">
+                                    dim-variant #EAEAEA
+                                </span>
                             </div>
                         </div>
                     </div>

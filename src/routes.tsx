@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import TestComponent from '../TestComponent';
+import StyleGuide from './pages/StyleGuide';
 
 const Router = () => {
     return (
         <Routes>
-            <Route path="/test" element={<TestComponent />} />
+            <Route path="/style-guide" element={<StyleGuide />} />
         </Routes>
     );
 };
