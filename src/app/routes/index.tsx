@@ -3,6 +3,7 @@ import KakaoLoginPage from '../../pages/auth/LoginPage/KakaoLoginPage';
 import KakaoLoginAccessPage from '../../pages/auth/LoginPage/KakaoLoginAccessPage';
 import SetNamePage from '../../pages/auth/LoginPage/SetNamePage';
 import SelectUserTypePage from '../../pages/auth/LoginPage/SelectUserTypePage';
+import TestComponent from '../TestComponent';
 
 const Router = () => {
     return (
@@ -11,6 +12,7 @@ const Router = () => {
             <Route path="/oauth/callback/kakao" element={<KakaoLoginAccessPage />} />
             <Route path="/setName" element={<SetNamePage />} />
             <Route path="/selectUserType" element={<SelectUserTypePage />} />
+            <Route path="/test" element={<TestComponent />} />
         </Routes>
     );
 };
