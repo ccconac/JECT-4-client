@@ -23,7 +23,7 @@ function SetNamePage() {
 
     const navigate = useNavigate();
     return (
-        <div className="flex min-h-screen flex-col justify-between">
+        <div className="flex min-h-screen flex-col justify-between py-14">
             <section className="mb-12 rounded-lg bg-gradient-to-r p-5">
                 <h1 className="text-display text-secondary">닉네임을 설정해 주세요.</h1>
                 <p className="text-small text-text-min">
@@ -43,7 +43,7 @@ function SetNamePage() {
             <section className="p-5">
                 <NextButton
                     onClick={() => {
-                        navigate('/selectUserType');
+                        navigate('/setJob');
                     }}
                 ></NextButton>
             </section>

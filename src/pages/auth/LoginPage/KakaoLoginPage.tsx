@@ -19,7 +19,7 @@ function KakaoLoginPage() {
     }, [navigate]);
 
     return (
-        <div className="flex min-h-screen flex-col justify-between">
+        <div className="flex min-h-screen flex-col justify-between py-14">
             <section className="mb-12 rounded-lg bg-gradient-to-r p-5">
                 <Swiper
                     modules={[Scrollbar, Pagination, Autoplay]} // 페이지네이션, 자동재생 등의 기능을 불러옴
