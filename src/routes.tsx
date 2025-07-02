@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import StyleGuide from './pages/StyleGuide';
-import LoginPage from './pages/login';
+import LoginPage from './pages/auth/LoginPage/KakaoLoginPage';
+import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
+import SetNamePage from './pages/auth/LoginPage/SetNamePage';
 import OnBoarding from './pages/onboarding';
 import MainLayout from './components/MainLayout';
 
@@ -9,6 +11,8 @@ const Router = () => {
         <Routes>
             {/* 인증/온보딩 : 푸터 없는 페이지들 */}
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
+            <Route path="/setName" element={<SetNamePage />} />
             <Route path="/onboarding" element={<OnBoarding />} />
 
             {/* 스타일 가이드 페이지 */}
