@@ -6,6 +6,7 @@ import NextButton from '../../../components/common/button/NextButton';
 function SetJobPage() {
     const [selected, setSelected] = useState<string>('');
     const navigate = useNavigate();
+    const isNextDisabled = !selected;
     const handleSelect = (value: string) => {
         setSelected(value);
     };
@@ -41,8 +42,11 @@ function SetJobPage() {
             </section>
             <section className="p-5">
                 <NextButton
+                    disabled={isNextDisabled}
                     onClick={() => {
-                        navigate('/');
+                        if (!isNextDisabled) {
+                            navigate('/');
+                        }
                     }}
                 ></NextButton>
             </section>

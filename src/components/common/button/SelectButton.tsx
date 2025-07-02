@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface ToggleButtonsProps {
+interface SelectButtonsProps {
     option: string;
     selected: string;
     onSelect: (value: string) => void;
 }
 
-const ToggleButtons: React.FC<ToggleButtonsProps> = ({ option, selected, onSelect }) => {
+const SelectButton: React.FC<SelectButtonsProps> = ({ option, selected, onSelect }) => {
     return (
         <button
             key={option}
@@ -23,4 +23,4 @@ const ToggleButtons: React.FC<ToggleButtonsProps> = ({ option, selected, onSelec
     );
 };
 
-export default ToggleButtons;
+export default SelectButton;
