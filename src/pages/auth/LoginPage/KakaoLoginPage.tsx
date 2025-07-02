@@ -1,26 +1,26 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import KakaoLoginButton from '../../../features/auth/kakao-login/ui/KakaoLoginButton';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
+import KakaoLoginButton from '../../../features/auth/kakao-login/ui/KakaoLoginButton';
 
 function KakaoLoginPage() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
+        const queryParams = new URLSearchParams(window.location.search);
         const code = queryParams.get('code');
 
         if (code) {
-            console.log('Kakao OAuth Code:', code);
+            // console.log('Kakao OAuth Code:', code);
         }
-    }, [location.search, navigate]);
+    }, [navigate]);
 
     return (
-        <div className="flex min-h-screen flex-col justify-evenly bg-gray-50">
-            <section className="mb-12 rounded-lg bg-gradient-to-r p-12">
+        <div className="flex min-h-screen flex-col justify-between">
+            <section className="mb-12 rounded-lg bg-gradient-to-r p-5">
                 <Swiper
                     modules={[Scrollbar, Pagination, Autoplay]} // 페이지네이션, 자동재생 등의 기능을 불러옴
                     spaceBetween={50}
@@ -71,7 +71,7 @@ function KakaoLoginPage() {
                     </SwiperSlide>
                 </Swiper>
             </section>
-            <section className="p-12">
+            <section className="p-5">
                 <KakaoLoginButton />
             </section>
         </div>
