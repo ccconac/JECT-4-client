@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import Input from '../../../components/common/input/ClearableInput';
 import NextButton from '../../../components/common/button/NextButton';
 

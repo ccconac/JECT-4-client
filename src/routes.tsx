@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router';
 import StyleGuide from './pages/StyleGuide';
 import LoginPage from './pages/auth/LoginPage/KakaoLoginPage';
 import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import SelectButton from '../../../components/common/button/SelectButton';
 import NextButton from '../../../components/common/button/NextButton';
 
