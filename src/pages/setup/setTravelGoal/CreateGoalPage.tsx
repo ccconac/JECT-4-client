@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 const weekNumbers = [1, 2, 3, 4, 5, 6, 7];
@@ -18,10 +18,10 @@ return (
             <p className="text-base text-[#757575] mb-4">
                 도착지(목표일)를 설정하면, 여정이 더 선명해져요.
             </p>
-            <span className="block text-[#6FC8BE] text-lg font-semibold mb-4">
+            <span className="block text-[#6FC8BE] text-lg mb-4">
                 2025년 6월 4일부터
             </span>
-            <div className="bg-white rounded-xl shadow p-4 mb-6">
+            <div className="rounded-xl shadow p-4 mb-6">
                 <div className="flex justify-between items-center mb-2">
                 {weekDays.map((day, index) => (
                     <span key={index} className="text-[#757575] text-base font-medium w-7 text-center">
@@ -34,7 +34,7 @@ return (
                     <button
                     key={num}
                     type="button"
-                    className={`w-7 h-7 flex items-center justify-center rounded-full text-lg font-semibold transition border-2 ${selectedDay === index ? "border-[#6FC8BE] text-[#364B59]" : "border-transparent text-[#364B59]/80"}`}
+                    className={`w-7 h-7 flex items-center justify-center rounded-full text-lg transition border-2 ${selectedDay === index ? "border-[#6FC8BE] text-[#364B59]" : "border-transparent text-[#364B59]/80"}`}
                     aria-pressed={selectedDay === index}
                     onClick={() => setSelectedDay(index)}
                     >
