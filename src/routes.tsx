@@ -1,18 +1,15 @@
 import { Routes, Route, Navigate } from 'react-router';
-import StyleGuide from './pages/StyleGuide';
 import LoginPage from './pages/auth/LoginPage/KakaoLoginPage';
 import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
-import SetNamePage from './pages/auth/LoginPage/SetNamePage';
-import SetJobPage from './pages/auth/LoginPage/SetJobPage';
-// import OnBoarding from './pages/onboarding';
+import SetNamePage from './pages/setup/setProfile/SetNamePage';
+import SetJobPage from './pages/setup/setProfile/SetJobPage';
 import MainLayout from './components/MainLayout';
-
-// <Route path="/onboarding" element={<OnBoarding />} />
+import StyleGuide from './pages/style-guide/StyleGuide';
 
 const Router = () => {
     return (
         <Routes>
-            {/* 인증/온보딩 : 푸터 없는 페이지들 */}
+            {/* 온보딩, 로그인, 셋업 페이지 */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
             <Route path="/setName" element={<SetNamePage />} />
