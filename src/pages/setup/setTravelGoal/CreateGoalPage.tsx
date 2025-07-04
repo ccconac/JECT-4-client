@@ -1,15 +1,15 @@
-    import React, { useState } from "react";
+import React, { useState } from "react";
 
-    const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
-    const weekNumbers = [1, 2, 3, 4, 5, 6, 7];
+const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
+const weekNumbers = [1, 2, 3, 4, 5, 6, 7];
 
-    const CreateGoalPage: React.FC = () => {
-    const [selectedDay, setSelectedDay] = useState<number>(3); // 수요일(4일, index 3)
-    const [goalName, setGoalName] = useState("토익뿌시기");
-    const [memo, setMemo] = useState("");
+const CreateGoalPage: React.FC = () => {
+const [selectedDay, setSelectedDay] = useState<number>(3); // 수요일(4일, index 3)
+const [goalName, setGoalName] = useState("토익뿌시기");
+const [memo, setMemo] = useState("");
 
-    return (
-        <main className="min-h-screen bg-[#FFFAEF] flex flex-col items-center px-4 py-8 sm:py-12">
+return (
+    <main className="min-h-screen bg-[#FFFAEF] flex flex-col items-center px-4 py-8 sm:py-12">
         <section className="w-full max-w-md mx-auto">
             <header className="mb-8">
             <h1 className="text-3xl font-bold text-[#364B59] mb-2 leading-tight">
