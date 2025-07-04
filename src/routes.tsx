@@ -1,28 +1,30 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import StyleGuide from './pages/StyleGuide';
+import { Routes, Route, Navigate } from 'react-router';
 import LoginPage from './pages/auth/LoginPage/KakaoLoginPage';
 import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
-import SetNamePage from './pages/auth/LoginPage/SetNamePage';
-import SetJobPage from './pages/auth/LoginPage/SetJobPage';
-import OnBoarding from './pages/onboarding';
+import SetNamePage from './pages/setup/setProfile/SetNamePage';
+import SetJobPage from './pages/setup/setProfile/SetJobPage';
+import CreateGoalPage from './pages/setup/setTravelGoal/createGoal';
+import SetGoalTypePage from './pages/setup/setTravelGoal/setGoalType';
+import SetMileStonePage from './pages/setup/setTravelGoal/setMileStone';
 import MainLayout from './components/MainLayout';
+import StyleGuide from './pages/style-guide/StyleGuide';
 
 const Router = () => {
     return (
         <Routes>
-            {/* 인증/온보딩 : 푸터 없는 페이지들 */}
+            {/* 온보딩, 로그인, 셋업 페이지 */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
             <Route path="/setName" element={<SetNamePage />} />
             <Route path="/setJob" element={<SetJobPage />} />
-            <Route path="/onboarding" element={<OnBoarding />} />
+            <Route path="/createGoal" element={<CreateGoalPage />} />
+            <Route path="/setGoalType" element={<SetGoalTypePage />} />
+            <Route path="/setMileStone" element={<SetMileStonePage />} />
 
             {/* 스타일 가이드 페이지 */}
             <Route path="/style-guide" element={<StyleGuide />} />
-
             {/* 메인 서비스 : 푸터 있는 페이지들 */}
             <Route path="/" element={<MainLayout />} />
-
             {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

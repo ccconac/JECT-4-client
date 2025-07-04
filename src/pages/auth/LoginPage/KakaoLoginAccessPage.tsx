@@ -1,5 +1,4 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, useSearchParams } from 'react-router';
 import { useEffect } from 'react';
 
 function KakaoLoginAccessPage() {
