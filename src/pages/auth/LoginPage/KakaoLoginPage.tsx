@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
-import KakaoLoginButton from '../../../features/auth/kakao-login/ui/KakaoLoginButton';
+import KakaoLoginButton from './KakaoLoginButton';
+
 
 function KakaoLoginPage() {
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import kakaoLoginImage from '/src/shared/assets/images/kakao_login.png';
+import kakaoLoginImage from '/src/assets/images/kakao_login.png'
 
 const KakaoLoginButton = () => {
     const K_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;

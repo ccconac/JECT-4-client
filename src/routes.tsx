@@ -4,8 +4,10 @@ import LoginPage from './pages/auth/LoginPage/KakaoLoginPage';
 import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
 import SetNamePage from './pages/auth/LoginPage/SetNamePage';
 import SetJobPage from './pages/auth/LoginPage/SetJobPage';
-import OnBoarding from './pages/onboarding';
+// import OnBoarding from './pages/onboarding';
 import MainLayout from './components/MainLayout';
+
+// <Route path="/onboarding" element={<OnBoarding />} />
 
 const Router = () => {
     return (
@@ -15,7 +17,6 @@ const Router = () => {
             <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
             <Route path="/setName" element={<SetNamePage />} />
             <Route path="/setJob" element={<SetJobPage />} />
-            <Route path="/onboarding" element={<OnBoarding />} />
 
             {/* 스타일 가이드 페이지 */}
             <Route path="/style-guide" element={<StyleGuide />} />
