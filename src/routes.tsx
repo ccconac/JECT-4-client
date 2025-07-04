@@ -3,9 +3,10 @@ import LoginPage from './pages/auth/LoginPage/KakaoLoginPage';
 import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
 import SetNamePage from './pages/setup/setProfile/SetNamePage';
 import SetJobPage from './pages/setup/setProfile/SetJobPage';
-import CreateGoalPage from './pages/setup/setTravelGoal/createGoal';
-import SetGoalTypePage from './pages/setup/setTravelGoal/setGoalType';
-import SetMileStonePage from './pages/setup/setTravelGoal/setMileStone';
+import CreateGoalPage from './pages/setup/setTravelGoal/CreateGoalPage';
+import SetGoalTypePage from './pages/setup/setTravelGoal/SetGoalTypePage';
+import SetMileStonePage from './pages/setup/setTravelGoal/SetMileStonePage';
+
 import MainLayout from './components/MainLayout';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
