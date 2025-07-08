@@ -3,7 +3,6 @@
 
 body {
     font-family: var(--font-pre);
-    background-color: #fffaef;
 }
 
 @theme {
@@ -67,4 +66,13 @@ body {
 
 .swiper-backface-hidden .swiper-slide {
     margin-bottom: 2rem;
+}
+
+/* Mobile Container */
+
+.mobile-container {
+    max-width: 390px; /* 아이폰 13,14 화면 너비 */
+    margin: 0 auto; /* 가운데 정렬 */
+    min-height: 100vh; /* 뷰포트 높이 채우기*/
+    background-color: #fffaef;
 }

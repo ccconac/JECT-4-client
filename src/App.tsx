@@ -5,7 +5,9 @@ import './index.css';
 function App() {
     return (
         <BrowserRouter>
-            <Router />
+            <div className="mobile-container">
+                <Router />
+            </div>
         </BrowserRouter>
     );
 }
