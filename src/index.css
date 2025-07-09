@@ -69,10 +69,12 @@ body {
 }
 
 /* Mobile Container */
+/* TODO : 컨테이너에 padding 20px 추가 공유 */
 
 .mobile-container {
     max-width: 390px; /* 아이폰 13,14 화면 너비 */
     margin: 0 auto; /* 가운데 정렬 */
     min-height: 100vh; /* 뷰포트 높이 채우기*/
+    padding: 0 20px; /* 디자인 토큰 좌우 패딩*/
     background-color: #fffaef;
 }
