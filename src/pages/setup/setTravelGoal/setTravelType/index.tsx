@@ -1,8 +1,8 @@
-import GoalTypeCard from './GoalTypeCard';
+import TravelTypeList from './TravelTypeList';
 
-const SetGoalTypePage = () => {
+const SetTravelTypePage = () => {
     return (
-        <div className="border pt-[106px]">
+        <div className="pt-[106px]">
             <header className="flex flex-col gap-1">
                 <h1 className="text-secondary text-title">
                     수진님, <br />
@@ -12,12 +12,9 @@ const SetGoalTypePage = () => {
                     마음 가는 대로, 혹은 계획대로? 여행 방식을 선택해주세요
                 </p>
             </header>
-            <main className="mt-[46px] flex flex-col gap-4">
-                <GoalTypeCard />
-                <GoalTypeCard />
-            </main>
+            <TravelTypeList />
         </div>
     );
 };
 
-export default SetGoalTypePage;
+export default SetTravelTypePage;
