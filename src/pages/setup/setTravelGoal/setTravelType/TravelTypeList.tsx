@@ -1,6 +1,7 @@
 import TravelTypeCard from './TravelTypeCard';
 
 export default function TravelTypeList() {
+
     const travelTypes = [
         {
             name: 'course',
@@ -16,7 +17,7 @@ export default function TravelTypeList() {
             description: '정해진 경로 없이 자유롭게 나아가는 목표입니다.',
             recommend: '다양한 문제를 시도하시는 분들에게 추천해요',
         },
-    ];
+    ] as const
 
     return (
         <main className="mt-[46px] flex cursor-pointer flex-col gap-4">
@@ -25,7 +26,6 @@ export default function TravelTypeList() {
                     key={travel.name}
                     name={travel.name}
                     title={travel.title}
-                    color={travel.color}
                     description={travel.description}
                     recommend={travel.recommend}
                 />
