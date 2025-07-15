@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 import KakaoLoginButton from './KakaoLoginButton';
 
-function KakaoLoginPage() {
+const KakaoLoginPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -76,6 +76,6 @@ function KakaoLoginPage() {
             </section>
         </div>
     );
-}
+};
 
 export default KakaoLoginPage;

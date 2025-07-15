@@ -6,6 +6,7 @@ import SetJobPage from './pages/setup/setProfile/SetJobPage';
 import CreateGoalPage from './pages/setup/setTravelGoal/CreateGoalPage';
 import SetGoalTypePage from './pages/setup/setTravelGoal/SetGoalTypePage';
 import SetMileStonePage from './pages/setup/setTravelGoal/SetMileStonePage';
+import MainPage from './pages/dashboard/MainPage';
 
 import MainLayout from './components/MainLayout';
 import StyleGuide from './pages/style-guide/StyleGuide';
@@ -21,6 +22,9 @@ const Router = () => {
             <Route path="/createGoal" element={<CreateGoalPage />} />
             <Route path="/setGoalType" element={<SetGoalTypePage />} />
             <Route path="/setMileStone" element={<SetMileStonePage />} />
+
+            {/* 메인 페이지 */}
+            <Route path="/main" element={<MainPage />} />
 
             {/* 스타일 가이드 페이지 */}
             <Route path="/style-guide" element={<StyleGuide />} />
