@@ -24,7 +24,7 @@ const KakaoLoginButton = () => {
             onClick={handleKakaoLogin}
         >
             <img
-                src="/public/assets/images/kakao_login.png"
+                src="/assets/images/kakao_login.png"
                 alt="카카오 로그인"
                 className="block h-auto w-full"
             />
