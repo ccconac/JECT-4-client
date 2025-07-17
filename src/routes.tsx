@@ -4,8 +4,9 @@ import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
 import SetNamePage from './pages/setup/setProfile/SetNamePage';
 import SetJobPage from './pages/setup/setProfile/SetJobPage';
 import SetTravelTypePage from './pages/setup/setTravelGoal/setTravelType/index';
-import CreateTravelPage from './pages/setup/setTravelGoal/createTravel/index';
-import SetMileStonePage from './pages/setup/setTravelGoal/setMileStone/index';
+import SetTravelNamePage from './pages/setup/setTravelGoal/setTravelName';
+import CreateStampPage from './pages/setup/setTravelGoal/createStamp';
+
 import MainLayout from './components/MainLayout';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
@@ -17,9 +18,9 @@ const Router = () => {
             <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
             <Route path="/set-name" element={<SetNamePage />} />
             <Route path="/set-job" element={<SetJobPage />} />
-            <Route path="/create-travel" element={<CreateTravelPage />} />
+            <Route path="/set-travel-name" element={<SetTravelNamePage />} />
             <Route path="/set-travel-type" element={<SetTravelTypePage />} />
-            <Route path="/set-milestone" element={<SetMileStonePage />} />
+            <Route path="/create-stamp" element={<CreateStampPage />} />
 
             {/* 스타일 가이드 페이지 */}
             <Route path="/style-guide" element={<StyleGuide />} />
