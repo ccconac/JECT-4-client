@@ -1,7 +1,8 @@
 import SetTravelHeader from '../_components/SetTravelHeader';
+import CreateTravelLinear from './CreateTravelLinear';
 
 // 여행 이름 설정
-const SetTravelNamePage = () => {
+const CreateTravelPage = () => {
     const userName = '수진';
     return (
         <div className="pt-[106px]">
@@ -13,8 +14,10 @@ const SetTravelNamePage = () => {
                     </>
                 }
             />
+            {/* 여행 이름 설정 (선형, 코스형) */}
+            <CreateTravelLinear />
         </div>
     );
 };
 
-export default SetTravelNamePage;
+export default CreateTravelPage;
