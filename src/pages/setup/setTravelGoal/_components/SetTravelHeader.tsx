@@ -1,3 +1,5 @@
+import arrowBackIcon from '../../../../assets/icons/arrow_back.svg';
+
 interface SetTravelHeaderProps {
     title: JSX.Element;
     description?: string;
@@ -7,7 +9,7 @@ const SetTravelHeader = ({ title, description }: SetTravelHeaderProps) => {
     return (
         <div>
             <img
-                src="/assets/icons/arrow_back.svg"
+                src={arrowBackIcon}
                 alt="뒤로 가기"
                 className="mb-[17px] cursor-pointer"
                 // 클릭 시 뒤로 가기 추가 필요
