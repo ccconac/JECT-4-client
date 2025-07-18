@@ -1,11 +1,8 @@
 const SetTravelNameInput = () => {
     return (
         <div className="flex flex-col gap-[7px]">
-            <label className="text-small">여행 이름</label>
-            <input
-                placeholder="여행 이름을 설정해주세요"
-                className="border border-amber-700"
-            />
+            <label className="text-small text-text-min">여행 이름</label>
+            <input className="text-subtitle text-text-sub text-placeholder:text-subtitle placeholder:text-text-min border-input-sub bg-input-focus h-[50px] rounded-md border py-2.5 pl-[15px] placeholder:opacity-40" />
         </div>
     );
 };

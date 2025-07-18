@@ -6,7 +6,7 @@ import CreateTravelLinearForm from './CreateTravelLinearForm';
 const CreateTravelPage = () => {
     const userName = '수진';
     return (
-        <div className="pt-[106px]">
+        <div className="pt-[106px] pb-20">
             <SetTravelHeader
                 title={
                     <>

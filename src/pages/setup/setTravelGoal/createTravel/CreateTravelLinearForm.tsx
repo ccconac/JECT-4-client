@@ -4,7 +4,7 @@ import SetTravelNameInput from './SetTravelNameInput';
 
 const CreateTravelLinearForm = () => {
     return (
-        <main className="mt-[46px] flex flex-col gap-[7px]">
+        <form className="mt-[46px] flex flex-col gap-[7px]">
             <SetTravelDateInput labelName="출발일" />
             <SetTravelDateInput labelName="도착일" />
             <span className="text-point1 text-small">
@@ -12,7 +12,14 @@ const CreateTravelLinearForm = () => {
             </span>
             <SetTravelNameInput />
             <SetTravelMemoInput />
-        </main>
+
+            <button
+                className="bg-text-min mx-auto mt-[94px] flex h-[51px] w-[350px] cursor-pointer flex-row items-center justify-center gap-[10px] rounded-md px-[161px] py-4 font-medium text-white"
+                type="submit"
+            >
+                다음
+            </button>
+        </form>
     );
 };
 
