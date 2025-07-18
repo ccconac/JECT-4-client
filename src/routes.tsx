@@ -3,11 +3,10 @@ import LoginPage from './pages/auth/LoginPage/KakaoLoginPage';
 import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
 import SetNamePage from './pages/setup/setProfile/SetNamePage';
 import SetJobPage from './pages/setup/setProfile/SetJobPage';
-import CreateGoalPage from './pages/setup/setTravelGoal/CreateGoalPage';
-import SetGoalTypePage from './pages/setup/setTravelGoal/SetGoalTypePage';
-import SetMileStonePage from './pages/setup/setTravelGoal/SetMileStonePage';
+import SetTravelTypePage from './pages/setup/setTravelGoal/setTravelType/index';
+import CreateTravelPage from './pages/setup/setTravelGoal/createTravel/index';
+import SetMileStonePage from './pages/setup/setTravelGoal/setMileStone/index';
 import MainPage from './pages/dashboard/MainPage';
-
 import MainLayout from './components/MainLayout';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
@@ -17,11 +16,11 @@ const Router = () => {
             {/* 온보딩, 로그인, 셋업 페이지 */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
-            <Route path="/setName" element={<SetNamePage />} />
-            <Route path="/setJob" element={<SetJobPage />} />
-            <Route path="/createGoal" element={<CreateGoalPage />} />
-            <Route path="/setGoalType" element={<SetGoalTypePage />} />
-            <Route path="/setMileStone" element={<SetMileStonePage />} />
+            <Route path="/set-name" element={<SetNamePage />} />
+            <Route path="/set-job" element={<SetJobPage />} />
+            <Route path="/create-travel" element={<CreateTravelPage />} />
+            <Route path="/set-travel-type" element={<SetTravelTypePage />} />
+            <Route path="/set-milestone" element={<SetMileStonePage />} />
 
             {/* 메인 페이지 */}
             <Route path="/main" element={<MainPage />} />
