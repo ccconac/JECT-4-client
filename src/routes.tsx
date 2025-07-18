@@ -18,7 +18,10 @@ const Router = () => {
             <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
             <Route path="/set-name" element={<SetNamePage />} />
             <Route path="/set-job" element={<SetJobPage />} />
-            <Route path="/create-travel" element={<CreateTravelPage />} />
+            <Route
+                path="/create-travel-linear"
+                element={<CreateTravelPage />}
+            />
             <Route path="/set-travel-type" element={<SetTravelTypePage />} />
             <Route path="/create-stamp" element={<CreateStampPage />} />
 
