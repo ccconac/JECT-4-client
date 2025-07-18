@@ -3,9 +3,10 @@ interface SetTravelDateInputProps {
 }
 
 const SetTravelDateInput = ({ labelName }: SetTravelDateInputProps) => {
+    // todo : labelName = "도착일 ", 달력 아이콘 렌더링
     return (
         <div className="flex flex-col gap-[7px]">
-            <label className="text-small text-secondary text-text-min">
+            <label className="text-small text-secondary opacity-60">
                 {labelName}
                 <span className="text-point1"> *</span>
             </label>
