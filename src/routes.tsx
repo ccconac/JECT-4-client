@@ -6,6 +6,7 @@ import SetJobPage from './pages/setup/setProfile/SetJobPage';
 import SetTravelTypePage from './pages/setup/setTravelGoal/setTravelType/index';
 import CreateTravelPage from './pages/setup/setTravelGoal/createTravel/index';
 import SetMileStonePage from './pages/setup/setTravelGoal/setMileStone/index';
+import MainPage from './pages/dashboard/MainPage';
 import MainLayout from './components/MainLayout';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
@@ -20,6 +21,9 @@ const Router = () => {
             <Route path="/create-travel" element={<CreateTravelPage />} />
             <Route path="/set-travel-type" element={<SetTravelTypePage />} />
             <Route path="/set-milestone" element={<SetMileStonePage />} />
+
+            {/* 메인 페이지 */}
+            <Route path="/main" element={<MainPage />} />
 
             {/* 스타일 가이드 페이지 */}
             <Route path="/style-guide" element={<StyleGuide />} />
