@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "name": "plog-web",
+=======
+    "name": "studytrip-client",
+>>>>>>> 06d954bc3ad0c28366cce92976b53277669b21ed
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -12,8 +16,13 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.28.0",
+<<<<<<< HEAD
         "@types/react": "^18.3.23",
         "@types/react-dom": "^18.3.7",
+=======
+        "@types/react": "^18.2.76",
+        "@types/react-dom": "^18.2.18",
+>>>>>>> 06d954bc3ad0c28366cce92976b53277669b21ed
         "@vitejs/plugin-react-swc": "^3.9.0",
         "autoprefixer": "^10.4.21",
         "eslint": "^9.28.0",
@@ -35,7 +44,10 @@
         "@tanstack/react-query": "^5.80.7",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
+<<<<<<< HEAD
         "react-hook-form": "^7.60.0",
+=======
+>>>>>>> 06d954bc3ad0c28366cce92976b53277669b21ed
         "react-router": "^7.6.3",
         "swiper": "^11.2.10",
         "zustand": "^5.0.5"
