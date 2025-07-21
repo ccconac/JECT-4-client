@@ -4,17 +4,20 @@ import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
 import SetNamePage from './pages/setup/setProfile/SetNamePage';
 import SetJobPage from './pages/setup/setProfile/SetJobPage';
 
-import MainPage from './pages/dashboard/MainPage';
 import MainLayout from './components/MainLayout';
+import MainPage from './pages/dashboard/MainPage';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
 import SetTravelTypePage from './pages/setup/setTravelGoal/setTravelType/index';
 import CreateTravelPage from './pages/setup/setTravelGoal/createTravel';
 import CreateStampPage from './pages/setup/setTravelGoal/createStamp';
+import KakaoLoginPage from './pages/auth/LoginPage/KakaoLoginPage';
 
 const Router = () => {
     return (
         <Routes>
+            {/* 메인 서비스 : 푸터 있는 페이지들 */}
+            <Route path="/" element={<KakaoLoginPage />} />
             {/* 온보딩, 로그인, 셋업 페이지 */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/oauth/callback/kakao" element={<LoginAccessPage />} />
