@@ -53,6 +53,7 @@ body {
     --color-input-sub: #895a3f;
     --color-input-focus: #f8f7f5;
     --color-plus-background: #eee7d8;
+    --color-footer-unselected: #8e8e8e;
 }
 
 /* Swiper CSS */
@@ -73,6 +74,7 @@ body {
 /* TODO : 컨테이너에 padding 20px 추가 공유 */
 
 .mobile-container {
+    position: relative;
     max-width: 390px; /* 아이폰 13,14 화면 너비 */
     margin: 0 auto; /* 가운데 정렬 */
     min-height: 100vh; /* 뷰포트 높이 채우기*/

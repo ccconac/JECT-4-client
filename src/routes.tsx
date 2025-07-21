@@ -5,7 +5,7 @@ import SetNamePage from './pages/setup/setProfile/SetNamePage';
 import SetJobPage from './pages/setup/setProfile/SetJobPage';
 
 import MainPage from './pages/dashboard/MainPage';
-import MainLayout from './components/MainLayout';
+import BottomNavBar from './components/BottomNavBar';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
 import SetTravelTypePage from './pages/setup/setTravelGoal/setTravelType/index';
@@ -35,7 +35,7 @@ const Router = () => {
             {/* 스타일 가이드 페이지 */}
             <Route path="/style-guide" element={<StyleGuide />} />
             {/* 메인 서비스 : 푸터 있는 페이지들 */}
-            <Route path="/" element={<MainLayout />} />
+            <Route path="/" element={<BottomNavBar />} />
             {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

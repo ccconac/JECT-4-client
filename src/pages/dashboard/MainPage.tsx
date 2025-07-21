@@ -1,4 +1,5 @@
 // 셋업 이후 메인 화면
+import BottomNavBar from '../../components/BottomNavBar';
 import MainTabButton from './MainTabButton';
 import MainCardButton from './MainCardButton';
 
@@ -10,7 +11,9 @@ const MainPage = () => {
             </div>
             <div className="mt-11">
                 <div className="mb-1 flex justify-end">
-                    <button className="text-caption text-secondary">편집</button>
+                    <button className="text-caption text-secondary">
+                        편집
+                    </button>
                 </div>
                 <div className="flex flex-col gap-4">
                     <button className="bg-plus-background text-text-sub flex w-full justify-center rounded-xl border py-6">
@@ -40,6 +43,7 @@ const MainPage = () => {
                     </div>
                 </div>
             </div>
+            <BottomNavBar />
         </div>
     );
 };
