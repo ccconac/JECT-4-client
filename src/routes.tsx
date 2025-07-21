@@ -4,6 +4,7 @@ import LoginAccessPage from './pages/auth/LoginPage/KakaoLoginAccessPage';
 import SetNamePage from './pages/setup/setProfile/SetNamePage';
 import SetJobPage from './pages/setup/setProfile/SetJobPage';
 
+import MainLayout from './components/MainLayout';
 import MainPage from './pages/dashboard/MainPage';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
@@ -31,11 +32,14 @@ const Router = () => {
             <Route path="/set-travel-type" element={<SetTravelTypePage />} />
             <Route path="/create-stamp" element={<CreateStampPage />} />
 
-            {/* 메인 페이지 */}
-            <Route path="/main" element={<MainPage />} />
-
             {/* 스타일 가이드 페이지 */}
             <Route path="/style-guide" element={<StyleGuide />} />
+
+            {/* 메인 서비스 : 푸터 있는 페이지들 */}
+            <Route path="/" element={<MainLayout />}>
+                {/* 메인 페이지 */}
+                <Route path="/main" element={<MainPage />} />
+            </Route>
             {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
