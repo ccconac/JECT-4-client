@@ -3,11 +3,13 @@ import CalendarIcon from '../../../../assets/icons/calendar_icon.svg';
 
 interface SetTravelDateInputProps {
     labelName: 'startDate' | 'finishDate';
+    onModalToggle?: () => void;
 }
 
-const SetTravelDateInput = ({ labelName }: SetTravelDateInputProps) => {
-    // todo : labelName = "도착일 ", 달력 아이콘 렌더링
-
+const SetTravelDateInput = ({
+    labelName,
+    onModalToggle,
+}: SetTravelDateInputProps) => {
     const labelMap = {
         startDate: '출발일',
         finishDate: '도착일',
@@ -28,13 +30,17 @@ const SetTravelDateInput = ({ labelName }: SetTravelDateInputProps) => {
             </label>
             <div className="relative w-full">
                 <input
-                    className="placeholder:text-subtitle placeholder:text-text-min border-input-sub bg-input-focus h-[50px] w-full rounded-md border py-2.5 pr-10 pl-[15px] placeholder:opacity-40"
+                    className="placeholder:text-subtitle placeholder:text-text-min border-input-sub bg-input-focus h-[50px] w-full cursor-pointer rounded-md border px-10 py-2.5 pl-[15px] placeholder:opacity-40"
                     placeholder={currentDate.format('YYYY년 M월 D일')}
                     id="date"
-                    disabled={labelName === 'startDate'}
+                    readOnly
                 />
                 {labelName === 'finishDate' && (
-                    <button className="absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer">
+                    <button
+                        className="absolute top-1/2 right-3 -translate-y-1/2 transform cursor-pointer"
+                        onClick={onModalToggle}
+                        type="button"
+                    >
                         <img src={CalendarIcon} alt="calendar" />
                     </button>
                 )}
@@ -44,4 +50,3 @@ const SetTravelDateInput = ({ labelName }: SetTravelDateInputProps) => {
 };
 
 export default SetTravelDateInput;
-// labelName === startDate -> 현재 날짜 가져와서, 포맷팅, input 의 placeholder 에 넣기
