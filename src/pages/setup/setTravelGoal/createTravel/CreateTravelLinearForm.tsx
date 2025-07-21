@@ -5,8 +5,8 @@ import SetTravelNameInput from './SetTravelNameInput';
 const CreateTravelLinearForm = () => {
     return (
         <form className="mt-[46px] flex flex-col gap-[7px]">
-            <SetTravelDateInput labelName="출발일" />
-            <SetTravelDateInput labelName="도착일" />
+            <SetTravelDateInput labelName="startDate" />
+            <SetTravelDateInput labelName="finishDate" />
             <span className="text-point1 text-small">
                 * 필수로 입력해주세요.{' '}
             </span>
