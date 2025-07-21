@@ -1,7 +1,6 @@
 import kakaoLoginImage from '/src/assets/images/kakao_login.png';
 
 const KakaoLoginButton = () => {
-    // @ts-ignore
     const K_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
     if (!K_REST_API_KEY) {
         console.error('카카오 REST API 키가 설정되지 않았습니다.');
