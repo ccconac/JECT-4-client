@@ -1,5 +1,4 @@
 // 셋업 이후 메인 화면
-import BottomNavBar from '../../components/BottomNavBar';
 import MainTabButton from './MainTabButton';
 import MainCardButton from './MainCardButton';
 
@@ -43,7 +42,6 @@ const MainPage = () => {
                     </div>
                 </div>
             </div>
-            <BottomNavBar />
         </div>
     );
 };
