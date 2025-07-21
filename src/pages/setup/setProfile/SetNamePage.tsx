@@ -43,7 +43,7 @@ function SetNamePage() {
             <section className="p-5">
                 <NextButton
                     onClick={() => {
-                        navigate('/setJob');
+                        navigate('/set-job');
                     }}
                 ></NextButton>
             </section>

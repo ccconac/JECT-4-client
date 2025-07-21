@@ -7,7 +7,7 @@ function KakaoLoginAccessPage() {
     const code = searchParams.get('code');
     useEffect(() => {
         if (code) {
-            navigate('/setName', { replace: true });
+            navigate('/set-name', { replace: true });
         } else {
             navigate('/', { replace: true });
         }
