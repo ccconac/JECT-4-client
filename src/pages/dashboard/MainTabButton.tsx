@@ -4,7 +4,7 @@ const MainTabButton = () => {
     const navigate = useNavigate();
     return (
         <div
-            className="bg-text-sub/40 border-text-sub inline-flex justify-center gap-1 rounded-full border p-1"
+            className="bg-text-sub/40 border-text-sub inline-flex justify-center gap-1 rounded-full border p-1 shadow-inner"
             role="tablist"
             aria-orientation="horizontal"
         >

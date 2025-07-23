@@ -38,20 +38,28 @@ const KakaoLoginPage = () => {
                     speed={500} // 슬라이더 넘어가는 속도
                 >
                     <SwiperSlide>
-                        <h1 className="text-display text-secondary">목표를 향한 하나의 여행</h1>
-                        <h1 className="text-display text-primary">스터디 트립</h1>
+                        <h1 className="text-display text-secondary">
+                            목표를 향한 하나의 여행
+                        </h1>
+                        <h1 className="text-display text-primary">
+                            스터디 트립
+                        </h1>
                         <p className="text-small text-text-min">
                             결과보다 과정을, 성취보다 성장의 가치를 발견해봐요
                         </p>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <h1 className="text-display text-secondary">스터디 유형 선택</h1>
+                        <h1 className="text-display text-secondary">
+                            스터디 유형 선택
+                        </h1>
                         <p className="text-small text-text-min">
                             스터디트립과 함께할 나만의 학습 스타일을 골라주세요!
                         </p>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <h1 className="text-display text-secondary">학습 시작</h1>
+                        <h1 className="text-display text-secondary">
+                            학습 시작
+                        </h1>
                         <p className="text-small text-text-min">
                             계획된 학습 일정에 따라 시간을 관리하고,
                             <br />
@@ -59,14 +67,18 @@ const KakaoLoginPage = () => {
                         </p>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <h1 className="text-display text-secondary">학습 일지 기록</h1>
+                        <h1 className="text-display text-secondary">
+                            학습 일지 기록
+                        </h1>
                         <p className="text-small text-text-min">
                             성취된 학습 내용, 집중 시간, 그리고 메모를
                             <br />
-                            학습 일지 기록에서 바로 확인하고 성장 과정을 되돌아보세요!
+                            학습 일지 기록에서 바로 확인하고 성장 과정을
+                            되돌아보세요!
                         </p>
                         <p className="text-small text-point2">
-                            한 걸음 한 걸음, 나의 성장을 담은 스터디트립으로 시작해요.
+                            한 걸음 한 걸음, 나의 성장을 담은 스터디트립으로
+                            시작해요.
                         </p>
                     </SwiperSlide>
                 </Swiper>

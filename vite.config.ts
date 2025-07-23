@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
+import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
@@ -24,6 +25,7 @@ export default defineConfig({
     },
     plugins: [
         react(),
+        svgr(), // SVG 파일을 React 컴포넌트로 변환
         tailwindcss(),
         VitePWA({
             registerType: 'autoUpdate', // 서비스 워커 자동 업데이트
