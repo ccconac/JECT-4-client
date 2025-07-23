@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import { useState } from 'react';
+import { getTodayDate } from '@/utils/date.ts';
 
 const SetTravelNameForm = () => {
     const [travelName, setTravelName] = useState('');
@@ -10,6 +11,8 @@ const SetTravelNameForm = () => {
         // 도착일 필드, 여행 이름 설정 필드 값 받아서 api 호출
     };
 
+    const todayDate = getTodayDate();
+
     return (
         <form className="mt-10 flex flex-col gap-3">
             {/* 여행 출발일 필드 (자동) */}
@@ -19,7 +22,7 @@ const SetTravelNameForm = () => {
                     <span className="text-point1"> *</span>
                 </label>
                 <span className="text-text-min/40 text-subtitle border-input-sub bg-input-focus h-[50px] rounded-md border py-2.5 pl-[15px]">
-                    2025년 7월 4일
+                    {todayDate}
                 </span>
             </div>
 
