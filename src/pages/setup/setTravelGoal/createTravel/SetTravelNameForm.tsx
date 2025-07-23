@@ -1,0 +1,62 @@
+
+const SetTravelNameForm = () => {
+    
+    
+    return (
+        <form className="mt-10 flex flex-col gap-3">
+
+            {/* 여행 출발일 필드 (자동) */}
+            <div className="flex flex-col gap-2">
+                <label className="text-small text-secondary opacity-60" htmlFor="date">
+                    출발일 
+                    <span className="text-point1"> *</span>
+                </label>
+                <span className="text-text-min/40 text-subtitle border-input-sub bg-input-focus h-[50px] rounded-md border py-2.5 pl-[15px] placeholder:opacity-40"
+            >
+                2025년 7월 4일
+                </span>
+            </div>
+
+            {/* 여행 도착일 필드 */}
+            <div className="flex flex-col gap-2">
+                <label className="text-small text-secondary opacity-60" htmlFor="date">
+                도착일
+                <span className="text-point1"> *</span>
+                </label>
+                <button
+                className="placeholder:text-subtitle placeholder:text-text-min border-input-sub bg-input-focus h-[50px] rounded-md border py-2.5 pl-[15px] placeholder:opacity-40"
+                id="date"
+                >
+                    <span>2025년 8월 1일</span>
+                </button>
+                <span className="text-point1 text-small">
+                * 필수로 입력해주세요.{' '}
+                </span>
+            </div>
+
+             {/* 여행 이름 설정 */}
+        <div className="flex flex-col gap-2">
+            <label htmlFor="travel-name" className="text-small text-secondary opacity-60" >
+                여행 이름
+            </label>
+            <input id="travel-name" className="text-subtitle text-text-sub text-placeholder:text-subtitle placeholder:text-text-min border-input-sub bg-input-focus h-[50px] rounded-md border py-2.5 pl-[15px] placeholder:opacity-40" />
+        </div>
+
+        {/* 여행 메모 설정 */}
+        <div className="flex flex-col gap-2 mb-20">
+            <label htmlFor="memo" className="text-small text-secondary opacity-60">
+                메모 추가
+            </label>
+            <textarea
+                id="memo"
+                placeholder="꼭 지켜야 할 내용을 작성해 주세요. "
+                className="text-text-sub text-body placeholder:text-body placeholder:text-text-min border-input-sub bg-input-focus h-25 rounded-md border pt-[11px] pl-[15px] placeholder:opacity-40"
+            />
+        </div>
+
+        <button className='h-12 w-full rounded-lg bg-primary flex justify-center items-center text-white cursor-pointer'>다음</button>
+        </form>
+    );
+};
+
+export default SetTravelNameForm;

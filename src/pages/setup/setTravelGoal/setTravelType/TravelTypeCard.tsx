@@ -22,11 +22,9 @@ const TravelTypeCard = ({
     const navigate = useNavigate();
 
     const handleCardClicked = (selectedName: 'linear' | 'nonLinear') => {
-        console.log('selectedName', selectedName); // course, explore
-
         const paths = {
-            linear: '/create-travel-linear',
-            nonLinear: '/create-travel-non-linear',
+            linear: '/set-travel-name',
+            nonLinear: '/set-travel-name',
         };
 
         navigate(paths[selectedName]);
