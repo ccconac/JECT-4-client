@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
 import { useState } from 'react';
-import { getTodayDate } from '@/utils/date.ts';
+import { getTodayDate } from '../../../../utils/date';
+import CalendarIcon from '../../../../assets/icons/calendar_icon.svg';
 
 const SetTravelNameForm = () => {
     const [travelName, setTravelName] = useState('');
@@ -27,7 +28,7 @@ const SetTravelNameForm = () => {
             </div>
 
             {/* 여행 도착일 필드 */}
-            <div className="flex flex-col gap-2">
+            <div className="relative flex flex-col gap-2">
                 <label
                     className="text-small text-secondary opacity-60"
                     htmlFor="date"
@@ -35,14 +36,14 @@ const SetTravelNameForm = () => {
                     도착일
                     <span className="text-point1"> *</span>
                 </label>
-                <span
-                    className="placeholder:text-subtitle placeholder:text-text-min border-input-sub bg-input-focus h-[50px] rounded-md border py-2.5 pl-[15px] placeholder:opacity-40"
-                    id="date"
-                >
-                    <span className="text-text-min/40 text-subtitle">
-                        2025년 8월 1일
-                    </span>
+                <span className="text-text-min/40 text-subtitle bg-input-focus border-input-sub h-[50px] cursor-pointer rounded-md border py-2.5 pl-[15px]">
+                    2025년 8월 1일
                 </span>
+                <img
+                    src={CalendarIcon}
+                    alt="calendar"
+                    className="absolute top-1/2 right-4 w-6 -translate-y-1/2 cursor-pointer"
+                />
                 <span className="text-point1 text-small">
                     * 필수로 입력해주세요.{' '}
                 </span>
@@ -94,6 +95,4 @@ const SetTravelNameForm = () => {
 
 export default SetTravelNameForm;
 
-// 출발일 날짜 가져오기
-// 달력 아이콘
 // 다음 버튼 터치 > api 호출, 라우팅

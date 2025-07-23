@@ -4,9 +4,9 @@
         "jsx": "react-jsx",
         "types": ["vite/client"],
 
-        "baseUrl": "src",
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["*"],
+            "@/*": ["src/*"],
             "@components/*": ["components/*"],
             "@pages/*": ["pages/*"],
             "@assets/*": ["assets/*"],
@@ -19,5 +19,8 @@
         }
     },
     "files": [],
-    "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+    "references": [
+        { "path": "./tsconfig.app.json" },
+        { "path": "./tsconfig.node.json" }
+    ]
 }

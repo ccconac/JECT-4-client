@@ -5,5 +5,5 @@ import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
 export function getTodayDate(): string {
-    return dayjs().format('YYYY년 MM월 DD일');
+    return dayjs().format('YYYY년 M월 D일');
 }
