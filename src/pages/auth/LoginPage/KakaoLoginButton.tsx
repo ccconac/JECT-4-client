@@ -1,4 +1,4 @@
-import kakaoLoginImage from '/src/assets/images/kakao_login.png';
+import kakaoLoginImage from '../../../assets/images/kakao_login.png';
 
 const KakaoLoginButton = () => {
     const K_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -25,7 +25,11 @@ const KakaoLoginButton = () => {
             aria-label="카카오 로그인"
             onClick={handleKakaoLogin}
         >
-            <img src={kakaoLoginImage} alt="카카오 로그인" className="block h-auto w-full" />
+            <img
+                src={kakaoLoginImage}
+                alt="카카오 로그인"
+                className="block h-auto w-full"
+            />
         </button>
     );
 };

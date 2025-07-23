@@ -1,9 +1,7 @@
 import SetTravelHeader from '../_components/SetTravelHeader';
-import CreateTravelLinearForm from './CreateTravelLinearForm';
+import SetTravelNameForm from './SetTravelNameForm';
 
-// 여행 이름 설정
-// Safe area (상태바, 노치) 고려한 pt
-const CreateTravelPage = () => {
+const SetTravelNamePage = () => {
     const userName = '수진';
     return (
         <div className="pt-[106px] pb-20">
@@ -15,10 +13,9 @@ const CreateTravelPage = () => {
                     </>
                 }
             />
-            {/* 여행 이름 설정 (선형, 코스형) */}
-            <CreateTravelLinearForm />
+            <SetTravelNameForm />
         </div>
     );
 };
 
-export default CreateTravelPage;
+export default SetTravelNamePage;
