@@ -4,10 +4,18 @@
         "jsx": "react-jsx",
         "types": ["vite/client"],
 
-        "baseUrl": ".",
+        "baseUrl": "src",
         "paths": {
-            // use @ as alias for src folder
-            "@/*": ["src/*"]
+            "@/*": ["*"],
+            "@components/*": ["components/*"],
+            "@pages/*": ["pages/*"],
+            "@assets/*": ["assets/*"],
+            "@utils/*": ["utils/*"],
+            "@constants/*": ["constants/*"],
+            "@hooks/*": ["hooks/*"],
+            "@services/*": ["services/*"],
+            "@store/*": ["store/*"],
+            "@types/*": ["types/*"]
         }
     },
     "files": [],
