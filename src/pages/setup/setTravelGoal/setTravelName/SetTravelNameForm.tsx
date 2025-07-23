@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { getTodayDate } from '../../../../utils/date';
 import CalendarIcon from '../../../../assets/icons/calendar_icon.svg';
 
@@ -7,9 +8,10 @@ const SetTravelNameForm = () => {
     const [travelName, setTravelName] = useState('');
 
     const isDisabled = travelName.trim() === '';
+    const navigate = useNavigate();
 
     const handleFormSubmit = () => {
-        // 도착일 필드, 여행 이름 설정 필드 값 받아서 api 호출
+        navigate('/set-stamp-linear'); // 스탬프 설정 (선형) 페이지 이동
     };
 
     const todayDate = getTodayDate();
@@ -94,5 +96,3 @@ const SetTravelNameForm = () => {
 };
 
 export default SetTravelNameForm;
-
-// 다음 버튼 터치 > api 호출, 라우팅

@@ -9,8 +9,8 @@ import MainLayout from './components/MainLayout';
 import StyleGuide from './pages/style-guide/StyleGuide';
 
 import SetTravelTypePage from './pages/setup/setTravelGoal/setTravelType/index';
-import CreateStampPage from './pages/setup/setTravelGoal/createStamp';
-import SetTravelNamePage from './pages/setup/setTravelGoal/createTravel';
+import SetTravelNamePage from './pages/setup/setTravelGoal/setTravelName';
+import SetStampLinearPage from './pages/setup/setTravelGoal/setStamp';
 
 const Router = () => {
     return (
@@ -25,7 +25,7 @@ const Router = () => {
             <Route path="/set-travel-type" element={<SetTravelTypePage />} />
             <Route path="/set-travel-name" element={<SetTravelNamePage />} />
 
-            <Route path="/create-stamp" element={<CreateStampPage />} />
+            <Route path="/set-stamp-linear" element={<SetStampLinearPage />} />
 
             {/* 메인 페이지 */}
             <Route path="/main" element={<MainPage />} />
