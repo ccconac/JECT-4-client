@@ -60,7 +60,12 @@ const SetTravelNameForm = ({ travelType }: SetTravelNameFormProps) => {
                     alt="calendar"
                     className="absolute top-1/2 right-4 w-6 -translate-y-1/2 cursor-pointer"
                 />
-                <span className="text-point1 text-small">
+                <span
+                    className={clsx(
+                        'text-small',
+                        travelType === 'course' ? 'text-point1' : 'text-primary'
+                    )}
+                >
                     {ENDDATE_HELPER_TEXT[travelType]}
                 </span>
             </div>
