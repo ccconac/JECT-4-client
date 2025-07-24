@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router';
 import arrowBackIcon from '../../../../assets/icons/arrow_back.svg';
 
 interface SetTravelHeaderProps {
-    title: (userName: string) => JSX.Element;
+    title: JSX.Element;
     description?: string;
 }
 

@@ -5,18 +5,18 @@ import { getTodayDate } from '../../../../utils/date';
 import CalendarIcon from '../../../../assets/icons/calendar_icon.svg';
 
 interface SetTravelNameFormProps {
-    travelType: 'COURSE' | 'EXPLORE';
+    travelType: 'course' | 'explore';
 }
 
 const SetTravelNameForm = ({ travelType }: SetTravelNameFormProps) => {
     const ENDDATE_INPUT_TEXT = {
-        COURSE: '2025년 8월 1일',
-        EXPLORE: '설정 안함',
+        course: '2025년 8월 1일',
+        explore: '설정 안함',
     };
 
     const ENDDATE_HELPER_TEXT = {
-        COURSE: '* 필수로 입력해주세요.',
-        EXPLORE: '* 선택사항입니다.',
+        course: '* 필수로 입력해주세요.',
+        explore: '* 선택사항입니다.',
     };
 
     const [travelName, setTravelName] = useState('');
