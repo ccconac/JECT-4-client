@@ -20,7 +20,7 @@ const KakaoLoginPage = () => {
 
     return (
         <div className="flex min-h-screen flex-col justify-between py-14">
-            <section className="mb-12 rounded-lg bg-gradient-to-r p-5">
+            <section className="mb-12 rounded-lg bg-gradient-to-r py-5">
                 <Swiper
                     modules={[Scrollbar, Pagination, Autoplay]} // 페이지네이션, 자동재생 등의 기능을 불러옴
                     spaceBetween={50}
@@ -83,7 +83,7 @@ const KakaoLoginPage = () => {
                     </SwiperSlide>
                 </Swiper>
             </section>
-            <section className="p-5">
+            <section className="py-5">
                 <KakaoLoginButton />
             </section>
         </div>
