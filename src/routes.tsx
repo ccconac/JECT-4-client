@@ -12,6 +12,7 @@ import SetTravelTypePage from './pages/setup/setTravelGoal/setTravelType/index';
 import SetTravelNamePage from './pages/setup/setTravelGoal/setTravelName';
 import SetStampLinearPage from './pages/setup/setTravelGoal/setStamp';
 import KakaoLoginPage from './pages/auth/LoginPage/KakaoLoginPage';
+import SettingsPage from './pages/settings/SettingsPage';
 
 const Router = () => {
     return (
@@ -36,7 +37,9 @@ const Router = () => {
             {/* 메인 서비스 : 푸터 있는 페이지들 */}
             <Route path="/" element={<MainLayout />}>
                 {/* 메인 페이지 */}
-                <Route path="/main" element={<MainPage />} />
+                <Route path="main" element={<MainPage />} />
+                {/* 세팅 페이지 */}
+                <Route path="settings" element={<SettingsPage />} />
             </Route>
             {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
             <Route path="*" element={<Navigate to="/" replace />} />

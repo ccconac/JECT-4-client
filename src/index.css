@@ -43,7 +43,7 @@ body {
     /*color*/
     --color-primary: #6fc8be;
     --color-secondary: #364b59;
-    --color-background: #fff8e9;
+    --color-background: #fffcf4;
     --color-point1: #f0816d;
     --color-point2: #f8be66;
     --color-text-sub: #895c41;
@@ -80,4 +80,5 @@ body {
     min-height: 100vh; /* 뷰포트 높이 채우기*/
     padding: 0 20px; /* 디자인 토큰 좌우 패딩*/
     background-color: #fffaef;
+    overflow-x: hidden;
 }
