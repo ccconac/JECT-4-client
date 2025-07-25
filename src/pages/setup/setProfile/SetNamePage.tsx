@@ -24,8 +24,10 @@ function SetNamePage() {
     const navigate = useNavigate();
     return (
         <div className="flex min-h-screen flex-col justify-between py-14">
-            <section className="mb-12 rounded-lg bg-gradient-to-r p-5">
-                <h1 className="text-display text-secondary">닉네임을 설정해 주세요.</h1>
+            <section className="mb-12 rounded-lg bg-gradient-to-r py-5">
+                <h1 className="text-display text-secondary">
+                    닉네임을 설정해 주세요.
+                </h1>
                 <p className="text-small text-text-min">
                     스터디트립에서 당신을 표현할 이름을 만들어 보세요.
                 </p>
@@ -40,7 +42,7 @@ function SetNamePage() {
                     * 특수문자를 제외하고 2~10자 내로 입력해 주세요.
                 </p>
             </section>
-            <section className="p-5">
+            <section className="py-5">
                 <NextButton
                     onClick={() => {
                         navigate('/set-job');
