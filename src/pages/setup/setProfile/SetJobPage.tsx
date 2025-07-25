@@ -13,7 +13,9 @@ function SetJobPage() {
     return (
         <div className="flex min-h-screen flex-col justify-between py-14">
             <section className="mb-12 rounded-lg bg-gradient-to-r p-5">
-                <h1 className="text-display text-secondary">직업을 설정해 주세요.</h1>
+                <h1 className="text-display text-secondary">
+                    직업을 설정해 주세요.
+                </h1>
                 <p className="text-small text-text-min">
                     선택해주신 직업군에 맞는 루틴을 추천해드릴게요.
                 </p>
@@ -45,7 +47,7 @@ function SetJobPage() {
                     disabled={isNextDisabled}
                     onClick={() => {
                         if (!isNextDisabled) {
-                            navigate('/');
+                            navigate('/main');
                         }
                     }}
                 ></NextButton>
