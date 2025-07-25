@@ -4,7 +4,21 @@ import { useNavigate } from 'react-router';
 import { getTodayDate } from '../../../../utils/date';
 import CalendarIcon from '../../../../assets/icons/calendar_icon.svg';
 
-const SetTravelNameForm = () => {
+interface SetTravelNameFormProps {
+    travelType: 'course' | 'explore';
+}
+
+const SetTravelNameForm = ({ travelType }: SetTravelNameFormProps) => {
+    const ENDDATE_INPUT_TEXT = {
+        course: '2025년 8월 1일',
+        explore: '설정 안함',
+    };
+
+    const ENDDATE_HELPER_TEXT = {
+        course: '* 필수로 입력해주세요.',
+        explore: '* 선택사항입니다.',
+    };
+
     const [travelName, setTravelName] = useState('');
 
     const isDisabled = travelName.trim() === '';
@@ -39,15 +53,20 @@ const SetTravelNameForm = () => {
                     <span className="text-point1"> *</span>
                 </label>
                 <span className="text-text-min/40 text-subtitle bg-input-focus border-input-sub h-[50px] cursor-pointer rounded-md border py-2.5 pl-[15px]">
-                    2025년 8월 1일
+                    {ENDDATE_INPUT_TEXT[travelType]}
                 </span>
                 <img
                     src={CalendarIcon}
                     alt="calendar"
                     className="absolute top-1/2 right-4 w-6 -translate-y-1/2 cursor-pointer"
                 />
-                <span className="text-point1 text-small">
-                    * 필수로 입력해주세요.{' '}
+                <span
+                    className={clsx(
+                        'text-small',
+                        travelType === 'course' ? 'text-point1' : 'text-primary'
+                    )}
+                >
+                    {ENDDATE_HELPER_TEXT[travelType]}
                 </span>
             </div>
 

@@ -3,7 +3,7 @@ import TravelTypeCard from './TravelTypeCard';
 export default function TravelTypeList() {
     const travelTypes = [
         {
-            name: 'linear',
+            name: 'course',
             title: '코스형',
             color: 'text-point2',
             description: '계획된 순서와 단계에 따라 진행하는 목표입니다.',
@@ -11,7 +11,7 @@ export default function TravelTypeList() {
                 '자격증 취득이나 시험 준비를 하고 계신 분들에게 추천해요',
         },
         {
-            name: 'nonLinear',
+            name: 'explore',
             title: '탐험형',
             color: 'text-point1',
             description: '정해진 경로 없이 자유롭게 나아가는 목표입니다.',

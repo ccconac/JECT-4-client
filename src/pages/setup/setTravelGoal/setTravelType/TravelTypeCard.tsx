@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 
 type TravelTypeCardProps = {
-    name: 'linear' | 'nonLinear';
+    name: 'course' | 'explore';
     title: string;
     description: string;
     recommend: string;
@@ -14,17 +14,17 @@ const TravelTypeCard = ({
     recommend,
 }: TravelTypeCardProps) => {
     const colorMap = {
-        linear: 'text-point2',
-        nonLinear: 'text-point1',
+        course: 'text-point2',
+        explore: 'text-point1',
     };
 
     const titleColor = colorMap[name] || 'text-point2';
     const navigate = useNavigate();
 
-    const handleCardClicked = (selectedName: 'linear' | 'nonLinear') => {
+    const handleCardClicked = (selectedName: 'course' | 'explore') => {
         const paths = {
-            linear: '/set-travel-name',
-            nonLinear: '/set-travel-name',
+            course: `/set-travel-name?type=${selectedName}`,
+            explore: `/set-travel-name?type=${selectedName}`,
         };
 
         navigate(paths[selectedName]);
