@@ -36,6 +36,8 @@ function SetJobPage() {
             console.log('서버 응답:', response.data);
 
             // 3. 성공 시 메인 페이지로 이동
+            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem('refreshToken', response.data.refreshToken);
             navigate('/main', { replace: true });
         } catch (error) {
             console.error('API 호출 실패:', error);
