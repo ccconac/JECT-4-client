@@ -18,7 +18,7 @@ const BackHeader = ({ title, onBack }: BackHeaderProps) => {
     };
 
     return (
-        <div className="absolute inset-x-0 flex w-full items-center px-4 py-3">
+        <div className="absolute inset-x-0 flex w-full items-center px-4 py-6">
             <button onClick={handleBack}>
                 <LeftArrow className="h-4 w-4" />
             </button>

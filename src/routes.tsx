@@ -16,6 +16,7 @@ import SetTravelNamePage from './pages/setup/setTravelGoal/setTravelName';
 import SetStampLinearPage from './pages/setup/setTravelGoal/setStamp';
 import SettingsPage from './pages/settings/SettingsPage';
 import UserPage from './pages/settings/UserPage';
+import WithdrawalPage from './pages/settings/WithdrawalPage';
 
 const Router = () => {
     return (
@@ -58,6 +59,10 @@ const Router = () => {
                 </Route>
                 {/* 세팅 내부 페이지들 */}
                 <Route path="/settings/user" element={<UserPage />} />
+                <Route
+                    path="/settings/withdrawal"
+                    element={<WithdrawalPage />}
+                />
 
                 {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
                 <Route path="*" element={<Navigate to="/" replace />} />
