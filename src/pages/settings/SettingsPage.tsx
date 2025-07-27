@@ -29,7 +29,7 @@ const SettingsPage = () => {
                         <ArrowIcon className="text-white" />
                     </button>
                 </div>
-                <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-white">
+                <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-white opacity-0">
                     프로필
                 </div>
             </div>

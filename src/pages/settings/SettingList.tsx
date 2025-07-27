@@ -1,19 +1,51 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useNavigate } from 'react-router';
 import SettingItem from './SettingItem';
 
 const SettingList = () => {
     const navigate = useNavigate();
     const settings = [
-        { label: '알림설정', onClick: () => console.log('알림 설정 클릭') },
-        { label: '공지사항', onClick: () => console.log('공지사항 클릭') },
-        { label: '앱 정보', onClick: () => console.log('앱 정보 클릭') },
+        {
+            label: '알림설정',
+            onClick: () =>
+                toast('아직 준비 중인 기능입니다.', {
+                    closeButton: false,
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    position: 'top-center',
+                }),
+        },
+        {
+            label: '공지사항',
+            onClick: () =>
+                toast('아직 준비 중인 기능입니다.', {
+                    closeButton: false,
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    position: 'top-center',
+                }),
+        },
+        {
+            label: '앱 정보',
+            onClick: () =>
+                toast('아직 준비 중인 기능입니다.', {
+                    closeButton: false,
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    position: 'top-center',
+                }),
+        },
         { label: '회원 탈퇴', onClick: () => navigate('/settings/withdrawal') },
     ];
+    const showToast = () => {};
     return (
         <div>
             {settings.map((item, index) => (
                 <SettingItem label={item.label} onClick={item.onClick} />
             ))}
+            <ToastContainer />
         </div>
     );
 };
