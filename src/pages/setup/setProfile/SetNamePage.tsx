@@ -3,10 +3,28 @@ import { useNavigate } from 'react-router';
 import Input from '../../../components/common/input/ClearableInput';
 import MainButton from '../../../components/common/button/MainButton';
 
+import { useAtom } from 'jotai';
+import { userInfoAtom } from '../../../store/userInfoAtom';
+
 // const nicknameRegex = /^[a-zA-Z0-9가-힣]{2,10}$/;
 
 function SetNamePage() {
     const [nickname, setNickname] = useState('');
+
+    const [userInfo, setUserInfo] = useAtom(userInfoAtom);
+
+    const handleSubmit = () => {
+        if (nickname) {
+            setUserInfo({
+                ...userInfo,
+                nickname: nickname,
+            });
+            navigate('/set-job', { replace: true });
+        } else {
+            alert('닉네임을 입력해 주세요.');
+        }
+    };
+
     // const [error, setError] = useState('');
 
     // const handleNicknameChange = (value: string) => {
@@ -43,11 +61,7 @@ function SetNamePage() {
                 </p>
             </section>
             <section className="py-5">
-                <MainButton
-                    onClick={() => {
-                        navigate('/set-job');
-                    }}
-                ></MainButton>
+                <MainButton onClick={handleSubmit} />
             </section>
         </div>
     );

@@ -9,6 +9,12 @@ import path from 'path';
 export default defineConfig({
     server: {
         host: '0.0.0.0', // 외부 디바이스 접속 설정
+        proxy: {
+            '/api': {
+                target: 'https://dev-api-studytrip.duckdns.org', // 실제 백엔드 주소
+                changeOrigin: true,
+            },
+        },
     },
     resolve: {
         alias: {

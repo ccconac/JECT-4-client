@@ -7,7 +7,7 @@ const KakaoLoginButton = () => {
         return null;
     }
 
-    const K_REDIRECT_URI = window.location.origin + '/oauth/callback/kakao';
+    const K_REDIRECT_URI = window.location.origin + '/auth/callback/kakao';
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
 
     const handleKakaoLogin = () => {
