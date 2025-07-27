@@ -26,7 +26,7 @@ const Router = () => {
                 <Route path="/" element={<LoginPage />} />
                 {/* 온보딩, 셋업 페이지 */}
                 <Route
-                    path="/oauth/callback/kakao"
+                    path="/auth/callback/kakao"
                     element={<LoginAccessPage />}
                 />
                 <Route path="/set-name" element={<SetNamePage />} />

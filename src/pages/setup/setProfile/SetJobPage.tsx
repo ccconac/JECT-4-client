@@ -3,13 +3,46 @@ import { useNavigate } from 'react-router';
 import SelectButton from '../../../components/common/button/SelectButton';
 import MainButton from '../../../components/common/button/MainButton';
 
+import { useAtom } from 'jotai';
+import { userInfoAtom } from '../../../store/userInfoAtom';
+
+import axios from 'axios';
+
 function SetJobPage() {
     const [selected, setSelected] = useState<string>('');
     const navigate = useNavigate();
     const isNextDisabled = !selected;
+
+    const [userInfo, setUserInfo] = useAtom(userInfoAtom);
+
     const handleSelect = (value: string) => {
         setSelected(value);
     };
+
+    const handleSubmit = async () => {
+        if (isNextDisabled) return;
+
+        const updatedUserInfo = { ...userInfo, category: selected };
+
+        setUserInfo(updatedUserInfo);
+        debugger;
+
+        try {
+            const response = await axios.post(
+                '/api/auth/signup/kakao',
+                updatedUserInfo
+            );
+
+            console.log('서버 응답:', response.data);
+
+            // 3. 성공 시 메인 페이지로 이동
+            navigate('/main', { replace: true });
+        } catch (error) {
+            console.error('API 호출 실패:', error);
+            alert('서버 요청 중 오류가 발생했습니다.');
+        }
+    };
+
     return (
         <div className="flex min-h-screen flex-col justify-between py-14">
             <section className="mb-12 rounded-lg py-5">
@@ -21,21 +54,25 @@ function SetJobPage() {
                 </p>
                 <div className="mt-12 flex flex-col gap-4">
                     <SelectButton
+                        value="STUDENT"
                         option="학생"
                         selected={selected}
                         onSelect={handleSelect}
                     ></SelectButton>
                     <SelectButton
+                        value="WORKER"
                         option="직장인"
                         selected={selected}
                         onSelect={handleSelect}
                     ></SelectButton>
                     <SelectButton
+                        value="FREELANCER"
                         option="프리랜서"
                         selected={selected}
                         onSelect={handleSelect}
                     ></SelectButton>
                     <SelectButton
+                        value="JOBSEEKER"
                         option="취업준비생"
                         selected={selected}
                         onSelect={handleSelect}
@@ -47,7 +84,7 @@ function SetJobPage() {
                     disabled={isNextDisabled}
                     onClick={() => {
                         if (!isNextDisabled) {
-                            navigate('/main');
+                            handleSubmit();
                         }
                     }}
                 ></MainButton>
