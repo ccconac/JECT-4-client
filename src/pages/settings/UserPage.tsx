@@ -10,7 +10,7 @@ const UserPage = () => {
         <div>
             <BackHeader title="프로필 관리" />
             <div className="flex min-h-screen w-full flex-col justify-between pb-14">
-                <div className="pt-16">
+                <div className="pt-20">
                     <div className="relative flex justify-center">
                         <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-white">
                             프로필
