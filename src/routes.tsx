@@ -17,6 +17,7 @@ import SetStampLinearPage from './pages/setup/setTravelGoal/setStamp';
 import SettingsPage from './pages/settings/SettingsPage';
 import UserPage from './pages/settings/UserPage';
 import WithdrawalPage from './pages/settings/WithdrawalPage';
+import PomodoroPage from './pages/pomodoro/PomodoroPage';
 
 const Router = () => {
     return (
@@ -63,6 +64,9 @@ const Router = () => {
                     path="/settings/withdrawal"
                     element={<WithdrawalPage />}
                 />
+
+                {/* 뽀모도로 타이머 페이지 */}
+                <Route path="/pomodoro" element={<PomodoroPage />} />
 
                 {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
                 <Route path="*" element={<Navigate to="/" replace />} />
