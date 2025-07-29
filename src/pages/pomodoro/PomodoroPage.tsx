@@ -9,7 +9,8 @@ const PomodoroPage = () => {
     const [isRunning, setIsRunning] = useState(false); //타이머가 작동 중인지 여부
     const [isStarted, setIsStarted] = useState(false); //타이머가 시작했는지 여부
     const intervalRef = useRef<number | null>(null);
-    const [isAutoStop, setIsAutoStop] = useState(false);
+    //const [isAutoStop, setIsAutoStop] = useState(false);
+    const [, setIsAutoStop] = useState(false);
 
     // 자동 정지 타이밍: 25분마다
     const getPausePoints = (duration: number, step: number = 1500) =>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import BackHeader from '../../components/common/BackHeaderLayout';
-import PhotoIcon from '../../assets/icons/photo.svg?react';
+//import PhotoIcon from '../../assets/icons/photo.svg?react';
 import ClearableInput from '../../components/common/input/ClearableInput';
 import MainButton from '../../components/common/button/MainButton';
 
