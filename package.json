@@ -42,6 +42,7 @@
         "dayjs": "^1.11.13",
         "jotai": "^2.12.5",
         "react": "^18.3.1",
+        "react-circular-progressbar": "^2.2.0",
         "react-customizable-progressbar": "^2.1.1",
         "react-dom": "^18.3.1",
         "react-hook-form": "^7.60.0",
