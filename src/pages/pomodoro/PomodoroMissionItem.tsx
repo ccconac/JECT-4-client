@@ -1,4 +1,4 @@
-const PomodoroStatusItem = () => {
+const PomodoroMissionItem = () => {
     return (
         <div className="flex items-center">
             <input
@@ -13,4 +13,4 @@ const PomodoroStatusItem = () => {
     );
 };
 
-export default PomodoroStatusItem;
+export default PomodoroMissionItem;
