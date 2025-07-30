@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import PomodoroTimer from './PomodoroTimer';
 import PomodoroButton from './PomodoroButton';
+import PomodoroMissionModal from './PomodoroMissionModal';
 import BackHeader from '../../components/common/BackHeaderLayout';
 
 const PomodoroPage = () => {
@@ -9,8 +10,7 @@ const PomodoroPage = () => {
     const [isRunning, setIsRunning] = useState(false); //타이머가 작동 중인지 여부
     const [isStarted, setIsStarted] = useState(false); //타이머가 시작했는지 여부
     const intervalRef = useRef<number | null>(null);
-    //const [isAutoStop, setIsAutoStop] = useState(false);
-    const [, setIsAutoStop] = useState(false);
+    const [isAutoStop, setIsAutoStop] = useState(false);
 
     // 자동 정지 타이밍: 25분마다
     const getPausePoints = (duration: number, step: number = 1500) =>
@@ -64,22 +64,28 @@ const PomodoroPage = () => {
 
     return (
         <div>
-            <BackHeader title="진행중인 스탬프 이름" />
+            <BackHeader
+                title="진행중인 스탬프 이름"
+                hideBackButton={isStarted}
+            />
             <div className="flex flex-col items-center pt-20">
                 <PomodoroTimer
                     duration={totalTime}
                     elapsedTime={elapsedTime}
                     width={250}
                 />
-                <div className="mt-9 h-20">스탬프 및 미션 표현 모달</div>
-                <PomodoroButton
-                    isRunning={isRunning}
-                    isStarted={isStarted}
-                    onStart={handleStart}
-                    onPause={handlePause}
-                    onResume={handleResume}
-                    onReset={handleReset}
-                />
+
+                <div className="mt-9 w-full">
+                    <PomodoroMissionModal isAutoStop={isAutoStop} />
+                    <PomodoroButton
+                        isRunning={isRunning}
+                        isStarted={isStarted}
+                        onStart={handleStart}
+                        onPause={handlePause}
+                        onResume={handleResume}
+                        onReset={handleReset}
+                    />
+                </div>
             </div>
         </div>
     );
