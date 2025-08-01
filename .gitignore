@@ -25,3 +25,4 @@ dist-ssr
 
 # 카카오 키 저장 파일
 .env
+dev-dist/sw.js

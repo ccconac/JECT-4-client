@@ -2,11 +2,16 @@ import LeftArrow from '../../assets/icons/left_arrow.svg?react';
 import { useNavigate } from 'react-router';
 
 interface BackHeaderProps {
-    title: string;
+    title?: string;
     onBack?: () => void; // 뒤로가기 동작 커스터마이징 가능
+    hideBackButton?: boolean;
 }
 
-const BackHeader = ({ title, onBack }: BackHeaderProps) => {
+const BackHeader = ({
+    title = '',
+    onBack,
+    hideBackButton = false,
+}: BackHeaderProps) => {
     const navigate = useNavigate();
 
     const handleBack = () => {
@@ -20,7 +25,7 @@ const BackHeader = ({ title, onBack }: BackHeaderProps) => {
     return (
         <div className="absolute inset-x-0 flex w-full items-center px-4 py-6">
             <button onClick={handleBack}>
-                <LeftArrow className="h-4 w-4" />
+                {!!hideBackButton ? <></> : <LeftArrow className="h-4 w-4" />}
             </button>
             <div className="text-text-sub text-subtitle flex-1 text-center font-semibold">
                 {title}
