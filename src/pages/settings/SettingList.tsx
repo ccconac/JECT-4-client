@@ -39,10 +39,10 @@ const SettingList = () => {
         },
         { label: '회원 탈퇴', onClick: () => navigate('/settings/withdrawal') },
     ];
-    const showToast = () => {};
+
     return (
         <div>
-            {settings.map((item, index) => (
+            {settings.map((item) => (
                 <SettingItem label={item.label} onClick={item.onClick} />
             ))}
             <ToastContainer />

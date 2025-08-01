@@ -8,7 +8,7 @@ function KakaoLoginAccessPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
-    const [userInfo, setUserInfo] = useAtom(userInfoAtom);
+    const [, setUserInfo] = useAtom(userInfoAtom);
 
     // code가 있을 경우 1. 로그인 시도 2. 로그인 실패할 시 userInfoAtom에 저장하고 이름 설정 페이지로 이동
     useEffect(() => {

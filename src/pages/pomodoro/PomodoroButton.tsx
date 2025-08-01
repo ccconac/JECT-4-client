@@ -21,12 +21,14 @@ const PomodoroButton = ({
 }: Props) => {
     if (!isStarted) {
         return (
-            <button
-                onClick={onStart}
-                className="bg-point2 text-body mt-10 rounded-full px-14 py-3 font-semibold text-white shadow-md transition"
-            >
-                시작
-            </button>
+            <div className="mt-9 flex items-center justify-center">
+                <button
+                    onClick={onStart}
+                    className="bg-point2 text-body rounded-full px-14 py-3 font-semibold text-white shadow-md transition"
+                >
+                    시작
+                </button>
+            </div>
         );
     }
 
