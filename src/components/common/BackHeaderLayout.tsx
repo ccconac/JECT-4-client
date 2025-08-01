@@ -2,7 +2,7 @@ import LeftArrow from '../../assets/icons/left_arrow.svg?react';
 import { useNavigate } from 'react-router';
 
 interface BackHeaderProps {
-    title: string;
+    title?: string;
     onBack?: () => void; // 뒤로가기 동작 커스터마이징 가능
     hideBackButton?: boolean; // 뒤로가기 버튼 보일지 결정
 }
