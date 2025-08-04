@@ -18,11 +18,18 @@ import { v4 as uuidv4 } from 'uuid';
 import MenuIcon from '../../../../assets/icons/menu.svg?react';
 import DeleteIcon from '../../../../assets/icons/delete.svg?react';
 import PlusIcon from '../../../../assets/icons/plus.svg?react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Item {
     id: string;
     text: string;
     isEditing: boolean;
+}
+
+interface SetStampCardProps {
+    items: Item[];
+    setItems: React.Dispatch<React.SetStateAction<Item[]>>;
 }
 
 function SortableItem({
@@ -76,6 +83,7 @@ function SortableItem({
                             if (e.key === 'Enter') onEnter(item.id, index);
                         }}
                         onBlur={() => onEnter(item.id, index)}
+                        maxLength={30}
                         // input 스타일 - 경계, 패딩, 둥근 모서리, 포커스 아웃라인 제거
                         className="text-subtitle flex-1 focus:outline-none"
                     />
@@ -100,10 +108,7 @@ function SortableItem({
     );
 }
 
-const SetStampCard = () => {
-    // 리스트 아이템 상태 관리
-    const [items, setItems] = useState<Item[]>([]);
-
+const SetStampCard = ({ items, setItems }: SetStampCardProps) => {
     // input DOM ref 배열 관리
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -119,6 +124,16 @@ const SetStampCard = () => {
 
     // 새로운 아이템 추가 함수
     const handleAddItem = () => {
+        if (items.length >= 30) {
+            toast('최대 30개까지 입력할 수 있습니다.', {
+                closeButton: false,
+                autoClose: 1000,
+                hideProgressBar: true,
+                position: 'top-center',
+            });
+            return;
+        }
+
         const newItem: Item = {
             id: uuidv4(),
             text: '',
@@ -206,6 +221,7 @@ const SetStampCard = () => {
             >
                 <PlusIcon />
             </button>
+            <ToastContainer />
         </div>
     );
 };
