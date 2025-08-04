@@ -16,7 +16,9 @@ const MainLayout = () => {
     const currentPath = location.pathname;
     return (
         <div>
-            <Outlet />
+            <div className="pb-20">
+                <Outlet />
+            </div>
             <div className="text-caption absolute inset-x-0 bottom-0 mb-6 flex h-14 w-full items-center justify-around border-t border-gray-300/70">
                 {navItems.map(({ path, label, Icon }) => {
                     const isActive = currentPath === path;
