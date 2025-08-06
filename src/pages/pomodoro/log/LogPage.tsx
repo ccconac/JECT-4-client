@@ -9,6 +9,7 @@ const LogPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');
     const maxLength = 500;
+    const timeSpent = '75:00';
 
     return (
         <div className="flex min-h-screen flex-col justify-between">
@@ -30,8 +31,8 @@ const LogPage = () => {
                                     <LogMissionItem />
                                 </div>
                             </div>
-                            <div className="w-full">
-                                <div className="text-caption text-text-sub absolute right-11">
+                            <div className="-mt-5 w-full">
+                                <div className="text-caption text-text-sub flex justify-end">
                                     {text.length}/{maxLength}
                                 </div>
                                 <textarea
@@ -39,7 +40,7 @@ const LogPage = () => {
                                     onChange={(e) => setText(e.target.value)}
                                     maxLength={maxLength}
                                     placeholder="기록하고 싶은 내용을 남겨주세요."
-                                    className="text-background text-small mt-5 flex w-full justify-center rounded-md border border-white bg-white/20 p-3"
+                                    className="text-background text-small flex w-full justify-center rounded-md border border-white bg-white/20 p-3"
                                 />
                             </div>
                         </div>
@@ -77,7 +78,7 @@ const LogPage = () => {
 
                                 <CircularProgressbar
                                     value={100}
-                                    text="75:00"
+                                    text={timeSpent}
                                     strokeWidth={9}
                                     styles={buildStyles({
                                         pathColor: `url(#gradientId)`,
