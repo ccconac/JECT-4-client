@@ -21,7 +21,6 @@ const PomodoroMissionModal = ({ isAutoStop }: Props) => {
             <div className="pb-4 text-[18px] font-semibold">제목</div>
             <div className="text-body flex flex-col gap-4">
                 <PomodoroMissionItem />
-                <PomodoroMissionItem />
             </div>
         </div>
     );
