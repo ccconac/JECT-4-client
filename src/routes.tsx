@@ -18,6 +18,7 @@ import SettingsPage from './pages/settings/SettingsPage';
 import UserPage from './pages/settings/UserPage';
 import WithdrawalPage from './pages/settings/WithdrawalPage';
 import PomodoroPage from './pages/pomodoro/PomodoroPage';
+import LogPage from './pages/pomodoro/log/LogPage';
 
 const Router = () => {
     return (
@@ -67,6 +68,9 @@ const Router = () => {
 
                 {/* 뽀모도로 타이머 페이지 */}
                 <Route path="/pomodoro" element={<PomodoroPage />} />
+
+                {/* 학습 후 학습 로그 페이지 */}
+                <Route path="/log" element={<LogPage />} />
 
                 {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
                 <Route path="*" element={<Navigate to="/" replace />} />
