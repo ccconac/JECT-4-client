@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router';
+import { Routes, Route } from 'react-router';
 
 import BasicLayout from './components/BasicLayout';
 
@@ -19,6 +19,8 @@ import UserPage from './pages/settings/UserPage';
 import WithdrawalPage from './pages/settings/WithdrawalPage';
 import PomodoroPage from './pages/pomodoro/PomodoroPage';
 import LogPage from './pages/pomodoro/log/LogPage';
+
+import DashboardPage from './pages/trip/dashboard/DashboardPage';
 
 const Router = () => {
     return (
@@ -72,8 +74,10 @@ const Router = () => {
                 {/* 학습 후 학습 로그 페이지 */}
                 <Route path="/log" element={<LogPage />} />
 
+                <Route path="/trip/dashboard" element={<DashboardPage />} />
+
                 {/* 404 처리 : 메인 페이지 리다이렉트 (임시) */}
-                <Route path="*" element={<Navigate to="/" replace />} />
+                {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
             </Route>
         </Routes>
     );
