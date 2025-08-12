@@ -1,8 +1,15 @@
-import { useNavigate } from 'react-router';
+//import { useNavigate } from 'react-router';
 
 const MainTabButton = () => {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     return (
+        <section className="mb-5 rounded-lg bg-gradient-to-r py-5">
+            <h1 className="text-title text-secondary">나의 여행 리스트</h1>
+            <p className="text-small text-text-min">
+                지금 도전 중인 목표들을 확인해보세요.
+            </p>
+        </section>
+        /*
         <div
             className="bg-text-sub/40 border-text-sub inline-flex justify-center gap-1 rounded-full border p-1 shadow-inner"
             role="tablist"
@@ -24,6 +31,7 @@ const MainTabButton = () => {
                 캘린더
             </button>
         </div>
+    */
     );
 };
 

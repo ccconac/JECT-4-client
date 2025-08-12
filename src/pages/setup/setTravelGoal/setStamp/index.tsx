@@ -55,7 +55,6 @@ const SetStampLinearPage = () => {
                 isOpen={isOpen}
                 onClose={handleCancel}
                 onConfirm={handleConfirm}
-                backdropClassName="bg-black/30 backdrop-blur"
             >
                 <MissionList missions={filteredMissions} />
             </Modal>
