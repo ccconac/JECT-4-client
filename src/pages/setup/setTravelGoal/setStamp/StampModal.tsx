@@ -10,14 +10,7 @@ interface ModalProps {
     children?: React.ReactNode;
 }
 
-const Modal = ({
-    isOpen,
-    onClose,
-    onConfirm,
-    className = '',
-    backdropClassName = '',
-    children,
-}: ModalProps) => {
+const Modal = ({ isOpen, onClose, onConfirm, children }: ModalProps) => {
     useEffect(() => {
         if (isOpen) document.body.style.overflow = 'hidden';
         else document.body.style.overflow = '';
@@ -27,11 +20,13 @@ const Modal = ({
 
     return ReactDOM.createPortal(
         <div
-            className={`fixed inset-0 z-50 flex items-center justify-center ${backdropClassName || 'bg-black/40'}`}
+            className={
+                'fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur'
+            }
             onClick={onClose}
         >
             <div
-                className={`max-w-md rounded-xl bg-white shadow-xl ${className}`}
+                className={'max-w-md rounded-xl bg-white shadow-xl'}
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="text-subtitle text-secondary flex flex-col items-center pt-4 text-center">
