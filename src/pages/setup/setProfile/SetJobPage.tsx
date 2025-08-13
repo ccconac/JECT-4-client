@@ -4,7 +4,7 @@ import SelectButton from '../../../components/common/button/SelectButton';
 import MainButton from '../../../components/common/button/MainButton';
 
 import { useAtom } from 'jotai';
-import { userInfoAtom } from '../../../store/userInfoAtom';
+import { userInfoAtom } from '../../../store/signupUserInfoAtom';
 
 import axios from 'axios';
 
