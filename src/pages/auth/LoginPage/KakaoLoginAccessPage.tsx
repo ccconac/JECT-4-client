@@ -9,18 +9,14 @@ function KakaoLoginAccessPage() {
     const [searchParams] = useSearchParams();
     const code = searchParams.get('code');
     const [, setUserInfo] = useAtom(userInfoAtom);
-    const [loginCheck, setLoginCheck] = useState(
-        localStorage.getItem('loginCheck') === 'true'
-    );
 
     const K_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
     const K_REDIRECT_URI = window.location.origin + '/auth/callback/kakao';
     const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code&scope=profile_image,account_email`;
 
-    debugger;
     // code가 있을 경우 1. 로그인 시도 2. 로그인 실패할 시 userInfoAtom에 저장하고 이름 설정 페이지로 이동
     useEffect(() => {
-        if (!code) {
+        if (code === null) {
             alert('로그인 실패: 인증 코드가 없습니다.');
             navigate('/', { replace: true });
             return;
@@ -28,11 +24,12 @@ function KakaoLoginAccessPage() {
 
         const login = async () => {
             // 로그인 api 호출 여부 확인
-            if (!loginCheck) {
+            if (localStorage.getItem('loginCheck') !== 'true') {
                 try {
                     const response = await axios.post('/api/auth/login/kakao', {
                         code,
                     });
+                    debugger;
 
                     // 로그인 성공 시 토큰 저장 후 메인 페이지 이동
                     localStorage.setItem(
@@ -45,15 +42,18 @@ function KakaoLoginAccessPage() {
                     );
 
                     console.log('로그인 성공', response);
+                    localStorage.setItem('loginCheck', 'false');
                     navigate('/main', { replace: true });
                 } catch (error) {
                     console.warn('로그인 실패, 신규 회원 처리', error);
 
                     localStorage.setItem('loginCheck', 'true');
+                    debugger;
                     window.location.href = kakaoURL;
                 }
             } else {
                 // 새 code가 있으면 userInfo에 저장하고 /set-name으로 이동
+
                 setUserInfo((prev) => ({
                     ...prev,
                     code,
@@ -63,7 +63,7 @@ function KakaoLoginAccessPage() {
         };
 
         login();
-    }, [code, navigate, setUserInfo, setLoginCheck]);
+    }, [code, navigate, setUserInfo]);
 
     return null;
 }
