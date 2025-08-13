@@ -1,4 +1,8 @@
 import { useSearchParams } from 'react-router';
+import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import SetTravelHeader from '../_components/SetTravelHeader';
 import SetTravelNameForm from './SetTravelNameForm';
 
@@ -7,6 +11,7 @@ type travelType = 'course' | 'explore';
 const SetTravelNamePage = () => {
     const userName = '수진';
 
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const searchParams = useSearchParams()[0];
     const travelType = searchParams.get('type') as travelType;
 
@@ -26,7 +31,7 @@ const SetTravelNamePage = () => {
     };
 
     return (
-        <div className="pt-[106px] pb-20">
+        <div className="pt-6 pb-20">
             <SetTravelHeader title={travelTypeMap[travelType]} />
             <SetTravelNameForm travelType={travelType} />
         </div>

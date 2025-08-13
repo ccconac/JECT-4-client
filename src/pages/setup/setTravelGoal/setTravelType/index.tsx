@@ -6,7 +6,7 @@ const SetTravelTypePage = () => {
     const userName = '수진';
 
     return (
-        <div className="pt-[106px]">
+        <div className="text-text-min pt-6">
             <SetTravelHeader
                 title={
                     <>
