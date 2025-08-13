@@ -1,7 +1,7 @@
 // 셋업 이후 메인 화면
 import MainTabButton from './MainTabButton';
 import MainCardButton from './MainCardButton';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ConfirmModal from '../../components/common/ConfirmModal';

@@ -54,16 +54,17 @@ body {
     --color-input-focus: #f8f7f5;
     --color-plus-background: #eee7d8;
     --color-footer-unselected: #8e8e8e;
+    --color-pomodoro-background: #e7eed8;
 }
 
 /* Swiper CSS */
 
 .swiper-scrollbar-drag {
-    background: var(--color-primary) !important;
+    background: var(--color-point2) !important;
 }
 
 .swiper-scrollbar {
-    background: #d9d9d9 !important;
+    background: var(--color-pomodoro-background) !important;
 }
 
 .swiper-backface-hidden .swiper-slide {

@@ -5,6 +5,10 @@ import { Autoplay, Pagination, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import KakaoLoginButton from './KakaoLoginButton';
+import OnBoarding1 from '../../../assets/images/onboarding1.png';
+import OnBoarding2 from '../../../assets/images/onboarding2.png';
+import OnBoarding3 from '../../../assets/images/onboarding3.png';
+import OnBoarding4 from '../../../assets/images/onboarding4.png';
 
 const KakaoLoginPage = () => {
     const navigate = useNavigate();
@@ -28,8 +32,6 @@ const KakaoLoginPage = () => {
                     navigation
                     pagination={{ clickable: true }}
                     scrollbar={{ draggable: true }}
-                    onSwiper={(swiper) => console.log(swiper)}
-                    onSlideChange={() => console.log('slide change')}
                     autoplay={{
                         // 자동 재생
                         delay: 4500, // 지연 시간 (한 슬라이더에 머물르는 시간)
@@ -41,20 +43,29 @@ const KakaoLoginPage = () => {
                         <h1 className="text-display text-secondary">
                             목표를 향한 하나의 여행
                         </h1>
-                        <h1 className="text-display text-primary">
+                        <h1 className="text-display text-point2">
                             스터디 트립
                         </h1>
                         <p className="text-small text-text-min">
                             결과보다 과정을, 성취보다 성장의 가치를 발견해봐요
                         </p>
+                        <div className="mt-7 px-9">
+                            <img src={OnBoarding1} alt="Onboarding 1" />
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                        <h1 className="text-display text-secondary">
-                            스터디 유형 선택
-                        </h1>
-                        <p className="text-small text-text-min">
-                            스터디트립과 함께할 나만의 학습 스타일을 골라주세요!
-                        </p>
+                        <div className="relative">
+                            <h1 className="text-display text-secondary">
+                                스터디 유형 선택
+                            </h1>
+                            <p className="text-small text-text-min">
+                                스터디트립과 함께할 나만의 학습 스타일을
+                                골라주세요!
+                            </p>
+                            <div className="mt-17 px-9">
+                                <img src={OnBoarding2} alt="Onboarding 2" />
+                            </div>
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <h1 className="text-display text-secondary">
@@ -65,6 +76,9 @@ const KakaoLoginPage = () => {
                             <br />
                             하나씩 완료해 나가요.
                         </p>
+                        <div className="mt-11 px-9">
+                            <img src={OnBoarding3} alt="Onboarding 3" />
+                        </div>
                     </SwiperSlide>
                     <SwiperSlide>
                         <h1 className="text-display text-secondary">
@@ -76,10 +90,9 @@ const KakaoLoginPage = () => {
                             학습 일지 기록에서 바로 확인하고 성장 과정을
                             되돌아보세요!
                         </p>
-                        <p className="text-small text-point2">
-                            한 걸음 한 걸음, 나의 성장을 담은 스터디트립으로
-                            시작해요.
-                        </p>
+                        <div className="mt-11 px-9">
+                            <img src={OnBoarding4} alt="Onboarding 4" />
+                        </div>
                     </SwiperSlide>
                 </Swiper>
             </section>
