@@ -43,6 +43,8 @@ const SetTravelNameForm = ({ travelType }: SetTravelNameFormProps) => {
         setIsDatePickerOpen(false);
     };
 
+    // 여행 정보 저장하기
+
     return (
         <form className="mt-10 flex flex-col gap-3">
             {/* 여행 출발일 필드 (자동) */}
