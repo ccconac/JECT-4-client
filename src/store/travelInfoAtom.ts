@@ -11,7 +11,7 @@ export interface TravelInfo {
     name: string;
     memo: string;
     category: Category;
-    endDate: string; // yyyy-MM-dd 형식
+    endDate: string;
     stamps: Stamp[];
 }
 
