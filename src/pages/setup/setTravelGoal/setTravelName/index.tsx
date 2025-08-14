@@ -1,17 +1,26 @@
 import { useSearchParams } from 'react-router';
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { useEffect } from 'react';
 
 import SetTravelHeader from '../_components/SetTravelHeader';
 import SetTravelNameForm from './SetTravelNameForm';
 
+import { useAtom } from 'jotai';
+import {
+    memberNameAtom,
+    fetchMemberNameAtom,
+} from '../../../../store/userInfoAtom';
+
 type travelType = 'course' | 'explore';
 
 const SetTravelNamePage = () => {
-    const userName = '수진';
+    // 유저이름 불러오기
+    const [userName] = useAtom(memberNameAtom);
+    const [, fetchMemberName] = useAtom(fetchMemberNameAtom);
 
-    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+    useEffect(() => {
+        fetchMemberName();
+    }, [fetchMemberName]);
+
     const searchParams = useSearchParams()[0];
     const travelType = searchParams.get('type') as travelType;
 

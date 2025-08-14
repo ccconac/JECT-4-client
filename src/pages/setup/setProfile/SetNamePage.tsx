@@ -4,7 +4,7 @@ import Input from '../../../components/common/input/ClearableInput';
 import MainButton from '../../../components/common/button/MainButton';
 
 import { useAtom } from 'jotai';
-import { userInfoAtom } from '../../../store/userInfoAtom';
+import { userInfoAtom } from '../../../store/signupUserInfoAtom';
 
 // const nicknameRegex = /^[a-zA-Z0-9가-힣]{2,10}$/;
 

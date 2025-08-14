@@ -1,8 +1,22 @@
 import { useNavigate } from 'react-router';
 import BackHeader from '../../components/common/BackHeaderLayout';
 import MainButton from '../../components/common/button/MainButton';
+import api from '../../lib/axios';
 
 const WithdrawalPage = () => {
+    const handleWithdrawal = async () => {
+        try {
+            const response = await api.delete('/members/me');
+            alert('회원 탈퇴가 완료되었습니다.');
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.setItem('loginCheck', 'false');
+            navigate('/'); // 홈으로 리다이렉트
+        } catch (error) {
+            console.warn('회원탈퇴 실패', error);
+        }
+    };
+
     const navigate = useNavigate();
     return (
         <div>
@@ -20,13 +34,7 @@ const WithdrawalPage = () => {
                         정말 탈퇴하시겠어요?
                     </div>
                 </div>
-                <MainButton
-                    colorClass="bg-text-sub"
-                    onClick={() => {
-                        alert('회원 탈퇴가 완료되었습니다.');
-                        navigate('/'); // 홈으로 리다이렉트
-                    }}
-                >
+                <MainButton colorClass="bg-text-sub" onClick={handleWithdrawal}>
                     회원 탈퇴
                 </MainButton>
             </div>

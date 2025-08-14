@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import axios from 'axios';
 import ArrowIcon from '../../assets/icons/arrow.svg?react';
 import StatCard from './StatCard';
 import SettingList from './SettingList';
+import ConfirmModal from '../../components/common/ConfirmModal';
 
 const stats = [
     { label: '탐험형', count: 8 },
@@ -11,6 +14,26 @@ const stats = [
 
 const SettingsPage = () => {
     const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleLogout = async () => {
+        setIsModalOpen(false);
+        try {
+            const response = await axios.post('/api/auth/logout', {
+                accessToken: localStorage.getItem('accessToken'),
+                refreshToken: localStorage.getItem('refreshToken'),
+            });
+
+            console.log('로그아웃 성공', response);
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            localStorage.setItem('loginCheck', 'false');
+            navigate('/', { replace: true });
+        } catch (error) {
+            console.warn('로그아웃 실패', error);
+        }
+    };
+
     return (
         <div>
             <div className="bg-secondary absolute inset-x-0 h-72 w-full"></div>
@@ -37,11 +60,21 @@ const SettingsPage = () => {
             <SettingList />
             <div className="-mx-5 my-1.5 h-2 w-screen bg-[#F4EDDE]"></div>
             <button
-                onClick={() => console.log('알림 설정 클릭')}
+                onClick={() => setIsModalOpen(true)}
                 className="text-secondary flex w-full cursor-pointer items-center justify-between rounded-lg px-2 py-5"
             >
                 <div className="text-point1">로그아웃</div>
             </button>
+            <ConfirmModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={handleLogout}
+                title={
+                    <div className="text-subtitle text-secondary flex flex-col items-center px-8 text-center font-semibold">
+                        로그아웃 하시겠습니까?
+                    </div>
+                }
+            />
         </div>
     );
 };

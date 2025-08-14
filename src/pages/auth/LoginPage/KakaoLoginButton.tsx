@@ -8,10 +8,11 @@ const KakaoLoginButton = () => {
     }
 
     const K_REDIRECT_URI = window.location.origin + '/auth/callback/kakao';
-    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code`;
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${K_REST_API_KEY}&redirect_uri=${K_REDIRECT_URI}&response_type=code&scope=profile_image,account_email`;
 
     const handleKakaoLogin = () => {
         try {
+            localStorage.setItem('loginCheck', 'false');
             window.location.href = kakaoURL;
         } catch (error) {
             console.error('카카오 로그인 리디렉션 중 오류 발생:', error);
