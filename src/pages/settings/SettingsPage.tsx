@@ -24,7 +24,7 @@ const SettingsPage = () => {
                 refreshToken: localStorage.getItem('refreshToken'),
             });
 
-            console.log('로그아웃 성공', response);
+            console.log('로그아웃 성공');
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
             localStorage.setItem('loginCheck', 'false');

@@ -20,10 +20,5 @@ export const travelInfoAtom = atom<TravelInfo>({
     memo: '',
     category: 'COURSE',
     endDate: '', // 기본값
-    stamps: [
-        {
-            name: '',
-            order: 0,
-        },
-    ],
+    stamps: [],
 });
