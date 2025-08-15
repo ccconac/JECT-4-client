@@ -1,70 +1,107 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import BackHeader from '../../components/common/BackHeaderLayout';
 import GoalStep from './_components/GoalStep';
+import useTripDetail from '../../hooks/trip/useTripDetail';
+
+type Align = 'left' | 'right' | 'center';
+type GoalState = 'complete' | 'goal' | 'enable';
 
 const TripPage = () => {
     const navigate = useNavigate();
+    const { tripId: tripIdParam } = useParams<{ tripId: string }>();
 
-    const path1 = 'M118 0V66C118 80 106 92 92 92H31C16 92 5 103 5 118V150';
-    const path2 = 'M5 0V5.5C5 15 13 23 23 26L211 26C225 26 237 38 237 50V50';
+    /* 형변환 및 유효성 검증 시 tripId가 변경되지 않을 경우, 재계산을 하지 않기 위해 useMemo 사용 */
+    const tripId = useMemo(() => {
+        const number = Number(tripIdParam);
 
-    const steps = [
-        {
-            sequence: '01',
-            title: '문제 유형 파악',
-            align: 'center',
-            pathD: path1,
-            svgHeight: 120,
-            goalState: 'complete',
-        },
-        {
-            sequence: '02',
-            title: '문제 유형 파악',
-            align: 'left',
-            pathD: path2,
-            goalState: 'complete',
-        },
-        {
-            sequence: '03',
-            title: `유형 연습\nQ8-10 복습`,
-            align: 'right',
-            pathDirection: 'flipped',
-            pathD: path2,
-            goalState: 'goal',
-            onNavigate: () => navigate('/trip/dashboard'),
-        },
-        {
-            sequence: '04',
-            title: '문제 유형 파악',
-            align: 'left',
-            pathD: path2,
-        },
-        {
-            sequence: '05',
-            title: '문제 유형 파악',
-            align: 'right',
-            pathDirection: 'flipped',
-            pathD: path2,
-        },
-        {
-            sequence: '06',
-            title: '문제 유형 파악',
-            align: 'left',
-            pathD: path2,
-            isLast: true,
-        },
-    ] as const;
+        return Number.isFinite(number) && number > 0 ? number : null;
+    }, [tripIdParam]);
+
+    useEffect(() => {
+        if (tripId === null) {
+            alert('잘못된 여행 id입니다.');
+            navigate(-1);
+        }
+    }, [tripId, navigate]);
+
+    if (tripId === null) return null;
+
+    const { data, isLoading, isError } = useTripDetail(tripId);
+
+    const steps = useMemo(() => {
+        if (!data) return [];
+
+        // 현재 목표 (완료되지 않은 목표 중 첫 번째 목표 선택)
+        const goalStep = data.stamps.findIndex((stamp) => !stamp.completed);
+
+        // 인덱스에 따른 목표 방향 반환 (center | left | right)
+        const getAlign = (index: number): Align => {
+            if (index === 0) return 'center';
+            return index % 2 ? 'left' : 'right';
+        };
+
+        // 방향에 따른 line 흐름 반환 (flipped | normal)
+        const getPathDirection = (align: Align) => {
+            return align === 'right' ? 'flipped' : 'normal';
+        };
+
+        // 위치별 상태 반환 (complete | goal | enable)
+        const getGoalState = (
+            stampCompleted: boolean,
+            index: number
+        ): GoalState => {
+            if (stampCompleted) return 'complete';
+            if (index === goalStep || (goalStep === -1 && index === 0)) {
+                return 'goal';
+            }
+
+            return 'enable';
+        };
+
+        return data.stamps.map((stamp, index) => {
+            const align = getAlign(index);
+            const goalState = getGoalState(stamp.completed, index);
+
+            return {
+                sequence: String(stamp.stampOrder),
+                title: stamp.stampName,
+                align,
+                pathDirection: getPathDirection(align),
+                goalState,
+                isLast: index === data.stamps.length - 1,
+                onNavigate:
+                    goalState !== 'enable'
+                        ? () => {
+                              navigate(
+                                  `/trip/${tripId}/dashboard?stampId=${stamp.stampId}`
+                              );
+                          }
+                        : undefined,
+            } as const;
+        });
+    }, [data]);
+
+    if (isLoading) {
+        return <div>여행 정보를 로드 중이에요....</div>;
+    }
+
+    /* alert 사이드 이펙트 방지를 위해 추후 오류 UI 반환 필요 */
+    if (isError) alert('여행 정보를 불러오지 못했어요.');
 
     return (
         <div className="flex flex-col">
             {/* 상단 헤더 */}
             <div className="h-[4rem]">
-                <BackHeader title="토익 뿌시기" hideLogButton={false} />
+                <BackHeader title={data?.name} hideLogButton={false} />
             </div>
-
-            <div className="h-[calc(100vh-10rem)] overflow-y-auto pt-6 [&::-webkit-scrollbar]:hidden">
+            <div className="h-[calc(100vh-10rem)] overflow-y-auto pt-[4rem] [&::-webkit-scrollbar]:hidden">
                 {steps.map((step) => (
-                    <GoalStep key={step.sequence} {...step} />
+                    <GoalStep
+                        key={`${data?.tripId}-${step.sequence}`}
+                        {...step}
+                    />
                 ))}
             </div>
         </div>
