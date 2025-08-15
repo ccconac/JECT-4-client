@@ -8,9 +8,12 @@ import ModalContainer from './_components/PomodoroTimer/ModalContainer';
 import PomodoroTimer, {
     type TimeValue,
 } from './_components/PomodoroTimer/PomodoroTimer';
+
 import BackHeader from '../../../components/common/BackHeaderLayout';
 import MainButton from '../../../components/common/button/MainButton';
+
 import useCreateMission from '../../../hooks/mission/useCreateMission';
+import useMissionsQuery from '../../../hooks/mission/useMissionQuery';
 
 export default function DashboardPage() {
     const navigate = useNavigate();
@@ -63,6 +66,15 @@ export default function DashboardPage() {
         id.stampId
     );
 
+    const {
+        data: missionData,
+        isLoading,
+        isError,
+    } = useMissionsQuery(id.tripId, id.stampId);
+
+    if (isLoading) return <div>로딩 중입니다...</div>;
+    if (isError) alert('미션을 불러올 수 없습니다.');
+
     const handleAddMission = (name: string, memo: string, order: number) => {
         if (!name.trim()) return;
         createMission({ name: name.trim(), memo: memo ?? '', order });
@@ -70,26 +82,29 @@ export default function DashboardPage() {
 
     const handleToggleEdit = (missionId: number) => {
         setMissions((prev) => {
-            const target = prev.find((mission) => mission.id === missionId);
+            const target = prev.find(
+                (mission) => mission.missionId === missionId
+            );
 
             if (!target) return prev;
 
-            const closing = target.isEditing;
+            const closing = target.completed;
             const next = prev.map((mission) =>
-                mission.id === missionId
-                    ? { ...mission, isEditing: !mission.isEditing }
+                mission.missionId === missionId
+                    ? { ...mission, isEditing: !mission.completed }
                     : mission
             );
 
-            if (closing && target.isNew) {
-                const name = (target.label ?? '').trim();
-                if (!name.length) return next.filter((m) => m.id !== missionId);
+            if (closing) {
+                const name = (target.missionName ?? '').trim();
+                if (!name.length)
+                    return next.filter((m) => m.missionId !== missionId);
 
                 if (!isPending) {
                     handleAddMission(
                         name,
-                        (target.memo ?? '').trim(),
-                        target.order ?? calcNextOrder(prev)
+                        '',
+                        target.missionOrder ?? calcNextOrder(prev)
                     );
                 }
             }
@@ -98,9 +113,11 @@ export default function DashboardPage() {
         });
     };
 
-    const calcNextOrder = (list: { order?: number }[]) =>
-        (list.reduce((max, mission) => Math.max(max, mission.order ?? 0), 0) ||
-            0) + 1;
+    const calcNextOrder = (list: { missionOrder?: number }[]) =>
+        (list.reduce(
+            (max, mission) => Math.max(max, mission.missionOrder ?? 0),
+            0
+        ) || 0) + 1;
 
     const handleConfirm = () => {
         setOpen(false);
@@ -115,11 +132,11 @@ export default function DashboardPage() {
 
             <div className="flex-1 overflow-y-auto pt-3">
                 <MissionSummary
-                    missions={missions}
+                    missions={missionData!}
                     checkedCount={checkedCount}
                 />
                 <MissionListSection
-                    missions={missions}
+                    missions={missionData!}
                     allChecked={allChecked}
                     checkedCount={checkedCount}
                     isEditMode={isEditMode}

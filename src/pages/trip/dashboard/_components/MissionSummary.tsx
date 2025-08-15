@@ -1,7 +1,7 @@
 import CalendarButton from '../_components/CalendarButton';
 import SessionGraph from '../_components/SessionGraph/SessionGraph';
 import WriteIcon from '../../../../assets/icons/write.svg?react';
-import type { Mission } from '../_hooks/useDashboardMissions';
+import { type Mission } from '../../../../store/mission/missionsAtom';
 
 interface MissionSummaryProps {
     missions: Mission[];
@@ -10,7 +10,7 @@ interface MissionSummaryProps {
 
 const MissionSummary = ({ missions, checkedCount }: MissionSummaryProps) => {
     return (
-        <section className="">
+        <section>
             <div className="bg-plus-background flex shrink-0 flex-col rounded-xl p-4">
                 <div className="flex w-full items-center gap-1.5">
                     {missions.length ? (
@@ -36,8 +36,8 @@ const MissionSummary = ({ missions, checkedCount }: MissionSummaryProps) => {
                     <div className="flex h-13 overflow-x-hidden pt-5">
                         {missions.map((mission, index) => (
                             <SessionGraph
-                                key={mission.id}
-                                isCompleted={mission.isChecked}
+                                key={mission.missionId}
+                                isCompleted={mission.completed}
                                 isLast={index === missions.length - 1}
                             />
                         ))}

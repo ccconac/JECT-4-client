@@ -1,6 +1,6 @@
 import PlusIcon from '../../../../assets/icons/roundedPlus.svg?react';
 import MissionCard from '../_components/MissionCard';
-import type { Mission } from '../_hooks/useDashboardMissions';
+import type { Mission } from '../../../../store/mission/missionsAtom';
 
 interface MissionListSectionProps {
     missions: Mission[];
@@ -68,17 +68,19 @@ const MissionListSection = ({
                 {missions.length ? (
                     missions.map((mission) => (
                         <MissionCard
-                            key={mission.id}
-                            label={mission.label}
-                            isEditing={mission.isEditing}
+                            key={mission.missionId}
+                            label={mission.missionName}
+                            isEditing={false}
                             isEditMode={isEditMode}
-                            isChecked={mission.isChecked}
+                            isChecked={mission.completed}
                             onChange={(value) =>
-                                onUpdateLabel(mission.id, value)
+                                onUpdateLabel(mission.missionId, value)
                             }
-                            onDelete={() => onDelete(mission.id)}
-                            onEditToggle={() => onToggleEdit(mission.id)}
-                            onToggleCheck={() => onToggleCheck(mission.id)}
+                            onDelete={() => onDelete(mission.missionId)}
+                            onEditToggle={() => onToggleEdit(mission.missionId)}
+                            onToggleCheck={() =>
+                                onToggleCheck(mission.missionId)
+                            }
                         />
                     ))
                 ) : (
