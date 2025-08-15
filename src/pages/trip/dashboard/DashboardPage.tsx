@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import MissionListSection from './_components/MissionListSection';
 import MissionSummary from './_components/MissionSummary';
@@ -8,9 +8,9 @@ import ModalContainer from './_components/PomodoroTimer/ModalContainer';
 import PomodoroTimer, {
     type TimeValue,
 } from './_components/PomodoroTimer/PomodoroTimer';
-
 import BackHeader from '../../../components/common/BackHeaderLayout';
 import MainButton from '../../../components/common/button/MainButton';
+import useCreateMission from '../../../hooks/mission/useCreateMission';
 
 export default function DashboardPage() {
     const navigate = useNavigate();
@@ -20,18 +20,87 @@ export default function DashboardPage() {
         missions,
         allChecked,
         checkedCount,
-        toggleEdit,
         toggleCheck,
         updateLabel,
         deleteMission,
         addMission,
+        setMissions,
     } = useDashboardMissions([]);
+
+    const { tripId: tripIdParam } = useParams<{ tripId: string }>();
+    const [searchParams] = useSearchParams();
+    const stampIdParam = searchParams.get('stampId');
 
     const [open, setOpen] = useState(false);
     const [time, setTime] = useState<TimeValue>({ minute: '30', session: '1' });
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const validateId = (id: number) =>
+        Number.isFinite(id) && id > 0 ? id : null;
+
+    const id = useMemo(() => {
+        const tripIdNumber = Number(tripIdParam);
+        const stampIdNumber = Number(stampIdParam);
+        return {
+            tripId: validateId(tripIdNumber),
+            stampId: validateId(stampIdNumber),
+        };
+    }, [tripIdParam, stampIdParam]);
+
+    useEffect(() => {
+        if (id.tripId === null || id.stampId === null) {
+            alert('잘못된 여행 id입니다.');
+            navigate(-1);
+        }
+    }, [id, navigate]);
+
+    if (id.tripId === null || id.stampId === null) return null;
+
+    const { mutate: createMission, isPending } = useCreateMission(
+        id.tripId,
+        id.stampId
+    );
+
+    const handleAddMission = (name: string, memo: string, order: number) => {
+        if (!name.trim()) return;
+        createMission({ name: name.trim(), memo: memo ?? '', order });
+    };
+
+    const handleToggleEdit = (missionId: number) => {
+        setMissions((prev) => {
+            const target = prev.find((mission) => mission.id === missionId);
+
+            if (!target) return prev;
+
+            const closing = target.isEditing;
+            const next = prev.map((mission) =>
+                mission.id === missionId
+                    ? { ...mission, isEditing: !mission.isEditing }
+                    : mission
+            );
+
+            if (closing && target.isNew) {
+                const name = (target.label ?? '').trim();
+                if (!name.length) return next.filter((m) => m.id !== missionId);
+
+                if (!isPending) {
+                    handleAddMission(
+                        name,
+                        (target.memo ?? '').trim(),
+                        target.order ?? calcNextOrder(prev)
+                    );
+                }
+            }
+
+            return next;
+        });
+    };
+
+    const calcNextOrder = (list: { order?: number }[]) =>
+        (list.reduce((max, mission) => Math.max(max, mission.order ?? 0), 0) ||
+            0) + 1;
 
     const handleConfirm = () => {
         setOpen(false);
@@ -58,7 +127,7 @@ export default function DashboardPage() {
                     onAddMission={addMission}
                     onUpdateLabel={updateLabel}
                     onDelete={deleteMission}
-                    onToggleEdit={toggleEdit}
+                    onToggleEdit={handleToggleEdit}
                     onToggleCheck={toggleCheck}
                 />
             </div>
@@ -69,7 +138,6 @@ export default function DashboardPage() {
                 </MainButton>
             </div>
 
-            {/* 모달 */}
             <ModalContainer
                 open={open}
                 title="뽀모도 시간"

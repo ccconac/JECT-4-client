@@ -5,6 +5,9 @@ export interface Mission {
     label: string;
     isEditing: boolean;
     isChecked: boolean;
+    isNew?: boolean;
+    order?: number;
+    memo?: string;
 }
 
 export function useDashboardMissions(initialMissions: Mission[]) {
@@ -13,14 +16,6 @@ export function useDashboardMissions(initialMissions: Mission[]) {
     const allChecked =
         missions.length > 0 && missions.every((m) => m.isChecked);
     const checkedCount = missions.filter((m) => m.isChecked).length;
-
-    const toggleEdit = (id: number) => {
-        setMissions((prev) =>
-            prev.map((m) =>
-                m.id === id ? { ...m, isEditing: !m.isEditing } : m
-            )
-        );
-    };
 
     const toggleCheck = (id: number) => {
         setMissions((prev) =>
@@ -40,10 +35,24 @@ export function useDashboardMissions(initialMissions: Mission[]) {
         setMissions((prev) => prev.filter((m) => m.id !== id));
     };
 
+    const calcNextOrder = () =>
+        (missions.reduce((max, m) => Math.max(max, m.order ?? 0), 0) || 0) + 1;
+
     const addMission = () => {
+        const tempId = -Date.now();
+        const order = calcNextOrder();
+
         setMissions((prev) => [
             ...prev,
-            { id: Date.now(), label: '', isEditing: true, isChecked: false },
+            {
+                id: tempId,
+                label: '',
+                memo: '',
+                order,
+                isEditing: true,
+                isChecked: false,
+                isNew: true,
+            },
         ]);
     };
 
@@ -51,7 +60,6 @@ export function useDashboardMissions(initialMissions: Mission[]) {
         missions,
         allChecked,
         checkedCount,
-        toggleEdit,
         toggleCheck,
         updateLabel,
         deleteMission,
