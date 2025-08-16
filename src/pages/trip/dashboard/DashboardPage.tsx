@@ -20,11 +20,10 @@ export default function DashboardPage() {
         missions,
         allChecked,
         checkedCount,
-        toggleEdit,
-        toggleCheck,
         updateLabel,
         deleteMission,
-        addMission,
+        toggleCheck,
+        updateMissionOrder,
     } = useDashboardMissions([]);
 
     const [open, setOpen] = useState(false);
@@ -55,11 +54,10 @@ export default function DashboardPage() {
                     checkedCount={checkedCount}
                     isEditMode={isEditMode}
                     onToggleEditMode={() => setIsEditMode((prev) => !prev)}
-                    onAddMission={addMission}
                     onUpdateLabel={updateLabel}
                     onDelete={deleteMission}
-                    onToggleEdit={toggleEdit}
                     onToggleCheck={toggleCheck}
+                    onUpdateMissionOrder={updateMissionOrder}
                 />
             </div>
 

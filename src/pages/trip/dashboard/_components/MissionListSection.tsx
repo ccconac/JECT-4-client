@@ -1,18 +1,19 @@
+import { useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import PlusIcon from '../../../../assets/icons/roundedPlus.svg?react';
-import MissionCard from '../_components/MissionCard';
-import type { Mission } from '../_hooks/useDashboardMissions';
+import MissionCard, { type MissionItem } from '../_components/MissionCard';
 
 interface MissionListSectionProps {
-    missions: Mission[];
+    missions: MissionItem[];
     allChecked: boolean;
     checkedCount: number;
     isEditMode: boolean;
     onToggleEditMode: () => void;
-    onAddMission: () => void;
-    onUpdateLabel: (id: number, value: string) => void;
-    onDelete: (id: number) => void;
-    onToggleEdit: (id: number) => void;
-    onToggleCheck: (id: number) => void;
+    onUpdateLabel: (id: string, value: string) => void;
+    onDelete: (id: string) => void;
+    onToggleCheck: (id: string) => void;
+    onUpdateMissionOrder: (newMissions: MissionItem[]) => void;
 }
 
 const MissionListSection = ({
@@ -21,12 +22,36 @@ const MissionListSection = ({
     checkedCount,
     isEditMode,
     onToggleEditMode,
-    onAddMission,
     onUpdateLabel,
     onDelete,
-    onToggleEdit,
     onToggleCheck,
+    onUpdateMissionOrder,
 }: MissionListSectionProps) => {
+    const handleAddMission = useCallback(() => {
+        const newMission: MissionItem = {
+            id: uuidv4(),
+            text: '',
+            isEditing: true,
+            isChecked: false,
+        };
+
+        const updatedMissions = [...missions, newMission];
+        onUpdateMissionOrder(updatedMissions);
+    }, [missions, onUpdateMissionOrder]);
+
+    const handleToggleEdit = useCallback(
+        (id: string) => {
+            const updatedMissions = missions.map((mission) =>
+                mission.id === id
+                    ? { ...mission, isEditing: !mission.isEditing }
+                    : mission
+            );
+
+            onUpdateMissionOrder(updatedMissions);
+        },
+        [missions, onUpdateMissionOrder]
+    );
+
     return (
         <section className="pt-[3.25rem]">
             {/* 헤더 영역 */}
@@ -49,13 +74,12 @@ const MissionListSection = ({
                         type="button"
                         aria-label="미션 추가"
                         className="cursor-pointer"
-                        onClick={onAddMission}
+                        onClick={handleAddMission}
                     >
                         <PlusIcon aria-hidden="true" />
                     </button>
                 </div>
             </div>
-
             {/* 서브 텍스트 */}
             {allChecked && (
                 <span className="text-sm text-[#585858]">
@@ -63,22 +87,18 @@ const MissionListSection = ({
                 </span>
             )}
 
-            {/* 미션 카드 리스트 */}
             <div className="flex h-[calc(100vh-25rem)] flex-col gap-3.5 overflow-y-auto px-0.5 py-4">
                 {missions.length ? (
-                    missions.map((mission) => (
+                    missions.map((mission, index) => (
                         <MissionCard
                             key={mission.id}
-                            label={mission.label}
-                            isEditing={mission.isEditing}
+                            mission={mission}
                             isEditMode={isEditMode}
-                            isChecked={mission.isChecked}
-                            onChange={(value) =>
-                                onUpdateLabel(mission.id, value)
-                            }
-                            onDelete={() => onDelete(mission.id)}
-                            onEditToggle={() => onToggleEdit(mission.id)}
-                            onToggleCheck={() => onToggleCheck(mission.id)}
+                            onChange={(id, value) => onUpdateLabel(id, value)}
+                            onDelete={(id) => onDelete(id)}
+                            onEditToggle={(id) => handleToggleEdit(id)}
+                            onToggleCheck={(id) => onToggleCheck(id)}
+                            index={index}
                         />
                     ))
                 ) : (
