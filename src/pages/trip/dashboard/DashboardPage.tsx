@@ -3,31 +3,50 @@ import { useNavigate } from 'react-router-dom';
 
 import MissionListSection from './_components/MissionListSection';
 import MissionSummary from './_components/MissionSummary';
-import { useDashboardMissions } from './_hooks/useDashboardMissions';
 import ModalContainer from './_components/PomodoroTimer/ModalContainer';
 import PomodoroTimer, {
     type TimeValue,
 } from './_components/PomodoroTimer/PomodoroTimer';
 
+import { useDashboardMissions } from './_hooks/useDashboardMissions';
+import useVaildateId from './_hooks/useVaildateId';
+
 import BackHeader from '../../../components/common/BackHeaderLayout';
 import MainButton from '../../../components/common/button/MainButton';
+import useMissionQuery from '../../../hooks/mission/useMissionQuery';
 
 export default function DashboardPage() {
-    const navigate = useNavigate();
     const [isEditMode, setIsEditMode] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [time, setTime] = useState<TimeValue>({ minute: '30', session: '1' });
+
+    const navigate = useNavigate();
+
+    const id = useVaildateId();
+
+    if (id === null) return null;
+
+    const {
+        data: fetchedMissions,
+        isLoading,
+        isError,
+    } = useMissionQuery(id.tripId!, id.stampId!);
 
     const {
         missions,
         allChecked,
         checkedCount,
+        // checkedMissionIds,
         updateLabel,
         deleteMission,
         toggleCheck,
         updateMissionOrder,
-    } = useDashboardMissions([]);
+    } = useDashboardMissions(fetchedMissions);
 
-    const [open, setOpen] = useState(false);
-    const [time, setTime] = useState<TimeValue>({ minute: '30', session: '1' });
+    if (isLoading) return <div>미션 목록 로드 중...</div>;
+    if (isError) alert('미션 목록을 불러올 수 없습니다.');
+
+    // console.log('체크 완료된 거:', checkedMissionIds);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);

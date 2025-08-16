@@ -1,25 +1,23 @@
 import React from 'react';
 import XboxIcon from '../../../../assets/icons/x.svg?react';
-
-export interface MissionItem {
-    id: string;
-    text: string;
-    isEditing: boolean;
-    isChecked: boolean;
-}
+import { type LocalMissionItem } from '../_hooks/useDashboardMissions';
 
 interface MissionCardProps {
-    mission: MissionItem;
-    onChange: (id: string, value: string) => void;
-    onEditToggle: (id: string, index: number) => void;
-    onDelete: (id: string) => void;
-    onToggleCheck: (id: string) => void;
+    mission: LocalMissionItem;
+    isEditing: boolean;
+    isChecked: boolean;
+    onChange: (id: number, value: string) => void;
+    onEditToggle: (id: number, index: number) => void;
+    onDelete: (id: number) => void;
+    onToggleCheck: (id: number) => void;
     isEditMode: boolean;
     index: number;
 }
 
 const MissionCard: React.FC<MissionCardProps> = ({
     mission,
+    isChecked,
+    isEditing,
     onChange,
     onEditToggle,
     isEditMode,
@@ -31,18 +29,20 @@ const MissionCard: React.FC<MissionCardProps> = ({
         <article
             className="mb-2 flex h-[4.4375rem] items-center justify-between rounded-xl bg-white py-[1.4375rem] pr-6 pl-[1.125rem] shadow-[3px_4px_8px_0_rgba(0,0,0,0.08)]" // margin-bottom 추가 (미션 카드 간 간격)
         >
-            {mission.isEditing ? (
+            {isEditing ? (
                 <input
                     type="text"
-                    value={mission.text}
-                    onChange={(e) => onChange(mission.id, e.target.value)}
+                    value={mission.missionName}
+                    onChange={(e) =>
+                        onChange(mission.missionId, e.target.value)
+                    }
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') {
                             e.preventDefault();
-                            onEditToggle(mission.id, index);
+                            onEditToggle(mission.missionId, index);
                         }
                     }}
-                    onBlur={() => onEditToggle(mission.id, index)}
+                    onBlur={() => onEditToggle(mission.missionId, index)}
                     className="w-full text-lg font-medium placeholder-[#CDCDCD] outline-none"
                     placeholder="할 일을 입력하세요."
                     autoFocus
@@ -50,9 +50,9 @@ const MissionCard: React.FC<MissionCardProps> = ({
             ) : (
                 <span
                     className="text-secondary flex-grow cursor-pointer text-lg font-semibold"
-                    onClick={() => onEditToggle(mission.id, index)}
+                    onClick={() => onEditToggle(mission.missionId, index)}
                 >
-                    {mission.text || '새 미션을 입력하세요.'}
+                    {mission.missionName}
                 </span>
             )}
             {isEditMode ? (
@@ -60,7 +60,7 @@ const MissionCard: React.FC<MissionCardProps> = ({
                     type="button"
                     aria-label="미션 삭제"
                     className="ml-4 h-8 w-8 cursor-pointer"
-                    onClick={() => onDelete(mission.id)}
+                    onClick={() => onDelete(mission.missionId)}
                 >
                     <XboxIcon
                         aria-hidden="true"
@@ -69,8 +69,8 @@ const MissionCard: React.FC<MissionCardProps> = ({
                 </button>
             ) : (
                 <input
-                    checked={mission.isChecked}
-                    onChange={() => onToggleCheck(mission.id)}
+                    checked={isChecked}
+                    onChange={() => onToggleCheck(mission.missionId)}
                     type="checkbox"
                     className="accent-text-sub ml-4 h-5 w-5"
                 />

@@ -2,18 +2,20 @@ import { useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import PlusIcon from '../../../../assets/icons/roundedPlus.svg?react';
-import MissionCard, { type MissionItem } from '../_components/MissionCard';
+import MissionCard from '../_components/MissionCard';
+
+import { type LocalMissionItem } from '../_hooks/useDashboardMissions';
 
 interface MissionListSectionProps {
-    missions: MissionItem[];
+    missions: LocalMissionItem[];
     allChecked: boolean;
     checkedCount: number;
     isEditMode: boolean;
     onToggleEditMode: () => void;
-    onUpdateLabel: (id: string, value: string) => void;
-    onDelete: (id: string) => void;
-    onToggleCheck: (id: string) => void;
-    onUpdateMissionOrder: (newMissions: MissionItem[]) => void;
+    onUpdateLabel: (id: number, value: string) => void;
+    onDelete: (id: number) => void;
+    onToggleCheck: (id: number) => void;
+    onUpdateMissionOrder: (newMissions: LocalMissionItem[]) => void;
 }
 
 const MissionListSection = ({
@@ -27,10 +29,14 @@ const MissionListSection = ({
     onToggleCheck,
     onUpdateMissionOrder,
 }: MissionListSectionProps) => {
-    const handleAddMission = useCallback(() => {
-        const newMission: MissionItem = {
-            id: uuidv4(),
-            text: '',
+    const handleAddMission = useCallback(async () => {
+        const newMissionId = Number(uuidv4());
+
+        const newMission: LocalMissionItem = {
+            missionId: newMissionId,
+            missionName: '',
+            missionOrder: missions.length + 1,
+            completed: false,
             isEditing: true,
             isChecked: false,
         };
@@ -40,9 +46,9 @@ const MissionListSection = ({
     }, [missions, onUpdateMissionOrder]);
 
     const handleToggleEdit = useCallback(
-        (id: string) => {
+        (id: number) => {
             const updatedMissions = missions.map((mission) =>
-                mission.id === id
+                mission.missionId === id
                     ? { ...mission, isEditing: !mission.isEditing }
                     : mission
             );
@@ -91,7 +97,7 @@ const MissionListSection = ({
                 {missions.length ? (
                     missions.map((mission, index) => (
                         <MissionCard
-                            key={mission.id}
+                            key={mission.missionId}
                             mission={mission}
                             isEditMode={isEditMode}
                             onChange={(id, value) => onUpdateLabel(id, value)}
@@ -99,6 +105,8 @@ const MissionListSection = ({
                             onEditToggle={(id) => handleToggleEdit(id)}
                             onToggleCheck={(id) => onToggleCheck(id)}
                             index={index}
+                            isEditing={mission.isEditing}
+                            isChecked={mission.isChecked}
                         />
                     ))
                 ) : (
