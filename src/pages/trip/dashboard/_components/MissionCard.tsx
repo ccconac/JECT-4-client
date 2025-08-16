@@ -1,9 +1,9 @@
 import React from 'react';
 import XboxIcon from '../../../../assets/icons/x.svg?react';
-import { type LocalMissionItem } from '../_hooks/useDashboardMissions';
+import { type MissionItem } from '../../../../types/mission/MissionItem';
 
 interface MissionCardProps {
-    mission: LocalMissionItem;
+    mission: MissionItem;
     isEditing: boolean;
     isChecked: boolean;
     onChange: (id: number, value: string) => void;
