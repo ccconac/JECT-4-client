@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PomodoroMissionItem from './PomodoroMissionItem';
 
 interface DailyMission {
@@ -11,6 +12,7 @@ type Props = {
     stampName: string;
     focusDurationInMinute: number;
     dailyMissions: DailyMission[];
+    onCheckedChange: (checkedIds: number[]) => void;
 };
 
 const PomodoroMissionModal = ({
@@ -18,7 +20,19 @@ const PomodoroMissionModal = ({
     stampName,
     focusDurationInMinute,
     dailyMissions,
+    onCheckedChange,
 }: Props) => {
+    const [checkedIds, setCheckedIds] = useState<number[]>([]);
+
+    const handleToggle = (id: number) => {
+        const newCheckedIds = checkedIds.includes(id)
+            ? checkedIds.filter((cid) => cid !== id)
+            : [...checkedIds, id];
+
+        setCheckedIds(newCheckedIds);
+        onCheckedChange(newCheckedIds); // ✅ 상위로 전달
+    };
+
     if (isAutoStop) {
         return (
             <div className="flex flex-col items-center">
@@ -42,6 +56,8 @@ const PomodoroMissionModal = ({
                         id={mission.dailyMissionId}
                         name={mission.missionName}
                         memo={mission.missionMemo}
+                        checked={checkedIds.includes(mission.dailyMissionId)} // ✅ 체크 상태 전달
+                        onToggle={() => handleToggle(mission.dailyMissionId)} // ✅ 클릭 핸들러
                     />
                 ))}
             </div>
