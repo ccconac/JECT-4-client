@@ -1,12 +1,17 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { type MissionItem } from '../../../../types/mission/MissionItem';
+import useDeleteMission from '../../../../hooks/mission/useDeleteMission';
 
 export const useDashboardMissions = (
+    tripId: number,
+    stampId: number,
     initialFetchedMissions?:
         | Omit<MissionItem, 'isEditing' | 'isChecked'>[]
         | undefined
 ) => {
     const [missions, setMissions] = useState<MissionItem[]>([]);
+
+    const { mutateDeleteMission } = useDeleteMission();
 
     useEffect(() => {
         if (initialFetchedMissions) {
@@ -45,24 +50,33 @@ export const useDashboardMissions = (
     );
 
     // 미션 내용 업데이트
-    const updateLabel = useCallback((id: number | string, value: string) => {
-        setMissions((prev) =>
-            prev.map((mission) =>
-                mission.missionId === id
-                    ? { ...mission, missionName: value }
-                    : mission
-            )
-        );
-        // ✅ 미션 수정 API 호출
-    }, []);
+    const updateLabel = useCallback(
+        (id: number | string, value: string) => {
+            setMissions((prev) =>
+                prev.map((mission) =>
+                    mission.missionId === id
+                        ? { ...mission, missionName: value }
+                        : mission
+                )
+            );
+            // ✅ 미션 수정 API 호출
+        },
+        [tripId, stampId]
+    );
 
     // 미션 삭제
-    const deleteMission = useCallback((id: number | string) => {
-        setMissions((prev) =>
-            prev.filter((mission) => mission.missionId !== id)
-        );
-        // ✅ 미션 삭제 API 호출
-    }, []);
+    const deleteMission = useCallback(
+        (id: number | string) => {
+            if (typeof id === 'number') {
+                mutateDeleteMission({ tripId, stampId, missionId: id });
+            }
+
+            setMissions((prev) =>
+                prev.filter((mission) => mission.missionId !== id)
+            );
+        },
+        [tripId, stampId, mutateDeleteMission]
+    );
 
     // 미션 체크 상태 토글
     const toggleCheck = useCallback((id: number | string) => {
@@ -76,9 +90,12 @@ export const useDashboardMissions = (
     }, []);
 
     // 전체 미션 배열 업데이트
-    const updateMissionOrder = useCallback((newMissions: MissionItem[]) => {
-        setMissions(newMissions);
-    }, []);
+    const updateMissionOrder = useCallback(
+        (newMissions: MissionItem[]) => {
+            setMissions(newMissions);
+        },
+        [tripId, stampId]
+    );
 
     // ✅ 미션 추가 API 호출
 

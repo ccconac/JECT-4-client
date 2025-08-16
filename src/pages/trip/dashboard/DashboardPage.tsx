@@ -41,7 +41,7 @@ export default function DashboardPage() {
         deleteMission,
         toggleCheck,
         updateMissionOrder,
-    } = useDashboardMissions(fetchedMissions);
+    } = useDashboardMissions(id.tripId!, id.stampId!, fetchedMissions);
 
     if (isLoading) return <div>미션 목록 로드 중...</div>;
     if (isError) alert('미션 목록을 불러올 수 없습니다.');

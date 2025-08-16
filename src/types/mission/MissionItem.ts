@@ -8,3 +8,9 @@ export interface MissionItem {
 }
 
 export type ServerMissionItem = Omit<MissionItem, 'isEditing' | 'isChecked'>;
+
+export interface CreateMission {
+    name: string;
+    memo: string;
+    order: number;
+}
