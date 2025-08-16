@@ -6,7 +6,7 @@ import type {
     RequestSuccess,
     Ids,
     ServerMissionItem,
-} from '../../types/mission/MissionItem';
+} from '../../types/mission/Mission';
 
 const useDeleteMission = () => {
     const queryClient = useQueryClient();

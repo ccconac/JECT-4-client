@@ -1,6 +1,6 @@
 import React from 'react';
 import XboxIcon from '../../../../assets/icons/x.svg?react';
-import { type MissionItem } from '../../../../types/mission/MissionItem';
+import { type MissionItem } from '../../../../types/mission/Mission';
 
 interface MissionCardProps {
     mission: MissionItem;

@@ -4,7 +4,7 @@ import type {
     RequestSuccess,
     MissionMutationProps,
     ServerMissionItem,
-} from '../../types/mission/MissionItem';
+} from '../../types/mission/Mission';
 import { patchMission } from '../../services/mission/missions';
 import { toast } from 'react-toastify';
 

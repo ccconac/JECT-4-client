@@ -17,17 +17,7 @@ export interface MissionItem {
 }
 
 export type ServerMissionItem = Omit<MissionItem, 'isEditing' | 'isChecked'>;
-
-export interface CreateMission {
-    name: string;
-    memo: string;
-    order: number;
-}
-
-export interface MissionContent {
-    name: string;
-    memo: string;
-}
+export type MissionContent = Pick<MissionItem, 'missionName'>;
 
 export interface RequestSuccess {
     success: boolean;

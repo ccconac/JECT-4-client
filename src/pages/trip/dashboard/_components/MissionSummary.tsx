@@ -2,7 +2,7 @@ import CalendarButton from '../_components/CalendarButton';
 import SessionGraph from '../_components/SessionGraph/SessionGraph';
 import WriteIcon from '../../../../assets/icons/write.svg?react';
 
-import { type MissionItem } from '../../../../types/mission/MissionItem';
+import { type MissionItem } from '../../../../types/mission/Mission';
 
 interface MissionSummaryProps {
     missions: MissionItem[];

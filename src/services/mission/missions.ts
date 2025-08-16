@@ -2,7 +2,7 @@ import api from '../../lib/axios';
 import type {
     MissionContent,
     ServerMissionItem,
-} from '../../types/mission/MissionItem';
+} from '../../types/mission/Mission';
 
 export const fetchMissions = async (
     tripId: number,

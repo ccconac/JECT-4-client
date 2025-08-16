@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { type MissionItem } from '../../../../types/mission/MissionItem';
+import { type MissionItem } from '../../../../types/mission/Mission';
 import useDeleteMission from '../../../../hooks/mission/useDeleteMission';
 import usePatchMission from '../../../../hooks/mission/usePatchMission';
 
@@ -46,7 +46,7 @@ export const useDashboardMissions = (
                     tripId,
                     stampId,
                     missionId: id,
-                    missionContent: { name: value, memo: '' },
+                    missionContent: { missionName: value },
                 });
             }
 

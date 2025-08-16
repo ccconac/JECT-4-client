@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import PlusIcon from '../../../../assets/icons/roundedPlus.svg?react';
 import MissionCard from '../_components/MissionCard';
 
-import { type MissionItem } from '../../../../types/mission/MissionItem';
+import { type MissionItem } from '../../../../types/mission/Mission';
 
 interface MissionListSectionProps {
     missions: MissionItem[];

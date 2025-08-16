@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchMissions } from '../../services/mission/missions';
-import { type ServerMissionItem } from '../../types/mission/MissionItem';
+import { type ServerMissionItem } from '../../types/mission/Mission';
 
 const useMissionQuery = (tripId: number, stampId: number) => {
     return useQuery<ServerMissionItem[], Error>({
