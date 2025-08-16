@@ -21,6 +21,11 @@ const LogPage = () => {
 
     const { tripId, dailyGoal } = location.state || {};
     console.log(dailyGoal);
+
+    if (!tripId || !dailyGoal) {
+        return null;
+    }
+
     const isNextDisabled = false;
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');

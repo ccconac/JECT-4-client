@@ -100,14 +100,18 @@ const PomodoroPage = () => {
     }, [totalTime, dailyGoal]);
 
     const endingAction = () => {
-        clearInterval(intervalRef.current!);
+        if (intervalRef.current !== null) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
         setIsRunning(false);
-        setElapsedTime(totalTime);
+        const finalElapsedTime = elapsedTime;
+        setElapsedTime(finalElapsedTime);
 
         // 완료 미션 담아서 넘기기
         const updatedDailyGoal = {
             ...dailyGoal,
-            elapsedTime: elapsedTime,
+            elapsedTime: finalElapsedTime,
             dailyMissions: dailyGoal.dailyMissions.map((mission) => ({
                 ...mission,
                 checked: checkedMissionIds.includes(mission.dailyMissionId),
