@@ -24,6 +24,11 @@ export interface CreateMission {
     order: number;
 }
 
+export interface MissionContent {
+    name: string;
+    memo: string;
+}
+
 export interface RequestSuccess {
     success: boolean;
     status: number;
