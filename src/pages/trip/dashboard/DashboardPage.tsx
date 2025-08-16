@@ -43,6 +43,7 @@ export default function DashboardPage() {
             navigate('/pomodoro', {
                 state: {
                     time,
+                    tripId: id.tripId,
                     dailyGoalId,
                 },
             });
