@@ -3,39 +3,88 @@ import { useNavigate } from 'react-router-dom';
 
 import MissionListSection from './_components/MissionListSection';
 import MissionSummary from './_components/MissionSummary';
-import { useDashboardMissions } from './_hooks/useDashboardMissions';
 import ModalContainer from './_components/PomodoroTimer/ModalContainer';
 import PomodoroTimer, {
     type TimeValue,
 } from './_components/PomodoroTimer/PomodoroTimer';
 
+import { useDashboardMissions } from './_hooks/useDashboardMissions';
+import useVaildateId from './_hooks/useVaildateId';
+
 import BackHeader from '../../../components/common/BackHeaderLayout';
 import MainButton from '../../../components/common/button/MainButton';
+import useMissionQuery from '../../../hooks/mission/useMissionQuery';
+import { type DailyGoal } from '../../../types/dailyGoal';
+import useCreateDailyGoal, {
+    type CreateDailyGoalSuccessResponse,
+} from '../../../hooks/dailyGoal/useCreateDailyGoal';
 
 export default function DashboardPage() {
-    const navigate = useNavigate();
     const [isEditMode, setIsEditMode] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [time, setTime] = useState<TimeValue>({ minute: '30', session: '1' });
+
+    const navigate = useNavigate();
+
+    const id = useVaildateId();
+
+    if (id === null) return null;
+
+    const {
+        data: fetchedMissions,
+        isLoading,
+        isError,
+    } = useMissionQuery(id.tripId!, id.stampId!);
+
+    const { mutateCreateDailyGoal } = useCreateDailyGoal({
+        onSuccess: (data: CreateDailyGoalSuccessResponse) => {
+            const dailyGoalId = data?.dailyGoalId;
+
+            navigate('/pomodoro', {
+                state: {
+                    time,
+                    tripId: id.tripId,
+                    dailyGoalId,
+                },
+            });
+        },
+        onError: () => {
+            alert('데일리 목표 추가를 실패했습니다.');
+        },
+    });
 
     const {
         missions,
         allChecked,
         checkedCount,
-        toggleEdit,
-        toggleCheck,
+        checkedMissionIds,
         updateLabel,
         deleteMission,
-        addMission,
-    } = useDashboardMissions([]);
+        toggleCheck,
+        updateMissionOrder,
+    } = useDashboardMissions(id.tripId!, id.stampId!, fetchedMissions);
 
-    const [open, setOpen] = useState(false);
-    const [time, setTime] = useState<TimeValue>({ minute: '30', session: '1' });
+    if (isLoading) return <div>미션 목록 로드 중...</div>;
+    if (isError) alert('미션 목록을 불러올 수 없습니다.');
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const handleConfirm = () => {
         setOpen(false);
-        navigate('/pomodoro', { state: { time } });
+
+        const payloadDailyGoal: DailyGoal = {
+            pomodoro: {
+                focusDurationInMinute: Number(time.minute),
+                focusSessionCount: Number(time.session),
+            },
+            missionIds: checkedMissionIds,
+        };
+
+        mutateCreateDailyGoal({
+            tripId: id.tripId!,
+            dailyGoal: payloadDailyGoal,
+        });
     };
 
     return (
@@ -55,11 +104,10 @@ export default function DashboardPage() {
                     checkedCount={checkedCount}
                     isEditMode={isEditMode}
                     onToggleEditMode={() => setIsEditMode((prev) => !prev)}
-                    onAddMission={addMission}
                     onUpdateLabel={updateLabel}
                     onDelete={deleteMission}
-                    onToggleEdit={toggleEdit}
                     onToggleCheck={toggleCheck}
+                    onUpdateMissionOrder={updateMissionOrder}
                 />
             </div>
 

@@ -1,61 +1,139 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
+import { type MissionItem } from '../../../../types/mission/Mission';
+import useDeleteMission from '../../../../hooks/mission/useDeleteMission';
+import usePatchMission from '../../../../hooks/mission/usePatchMission';
 
-export interface Mission {
-    id: number;
-    label: string;
-    isEditing: boolean;
-    isChecked: boolean;
-}
+export const useDashboardMissions = (
+    tripId: number,
+    stampId: number,
+    initialFetchedMissions?:
+        | Omit<MissionItem, 'isEditing' | 'isChecked'>[]
+        | undefined
+) => {
+    const [missions, setMissions] = useState<MissionItem[]>([]);
+    const [debouncedUpdate, setDebouncedUpdate] = useState<{
+        id: number | string;
+        value: string;
+    } | null>(null);
 
-export function useDashboardMissions(initialMissions: Mission[]) {
-    const [missions, setMissions] = useState<Mission[]>(initialMissions);
+    const { mutateDeleteMission } = useDeleteMission();
+    const { mutatePatchMission } = usePatchMission();
 
-    const allChecked =
-        missions.length > 0 && missions.every((m) => m.isChecked);
-    const checkedCount = missions.filter((m) => m.isChecked).length;
+    useEffect(() => {
+        if (initialFetchedMissions) {
+            const convertedMissions: MissionItem[] = initialFetchedMissions.map(
+                (m) => ({
+                    missionId: m.missionId,
+                    missionName: m.missionName,
+                    missionOrder: m.missionOrder,
+                    completed: m.completed,
+                    isEditing: false,
+                    isChecked: false,
+                })
+            );
+            setMissions(convertedMissions);
+        }
+    }, [initialFetchedMissions]);
 
-    const toggleEdit = (id: number) => {
+    useEffect(() => {
+        if (!debouncedUpdate) return;
+
+        const handler = setTimeout(() => {
+            const { id, value } = debouncedUpdate;
+
+            if (typeof id === 'number') {
+                mutatePatchMission({
+                    tripId,
+                    stampId,
+                    missionId: id,
+                    missionContent: { missionName: value },
+                });
+            }
+
+            setDebouncedUpdate(null);
+        }, 500);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [debouncedUpdate, tripId, stampId, mutatePatchMission]);
+
+    // 모든 미션이 완료되었는지 확인
+    const allChecked = useMemo(
+        () => missions.every((mission) => mission.completed),
+        [missions]
+    );
+
+    const checkedMissionIds = useMemo(
+        () =>
+            missions
+                .filter((mission) => mission.isChecked)
+                .map((mission) => mission.missionId),
+        [missions]
+    );
+
+    // 완료된 미션 개수 계산
+    const checkedCount = useMemo(
+        () => missions.filter((mission) => mission.completed).length,
+        [missions]
+    );
+
+    // 미션 내용 업데이트
+    const updateLabel = useCallback((id: number | string, value: string) => {
         setMissions((prev) =>
-            prev.map((m) =>
-                m.id === id ? { ...m, isEditing: !m.isEditing } : m
+            prev.map((mission) =>
+                mission.missionId === id
+                    ? { ...mission, missionName: value }
+                    : mission
             )
         );
-    };
 
-    const toggleCheck = (id: number) => {
+        setDebouncedUpdate({ id, value });
+    }, []);
+
+    // 미션 삭제
+    const deleteMission = useCallback(
+        (id: number | string) => {
+            if (typeof id === 'number') {
+                mutateDeleteMission({ tripId, stampId, missionId: id });
+            }
+
+            setMissions((prev) =>
+                prev.filter((mission) => mission.missionId !== id)
+            );
+        },
+        [tripId, stampId, mutateDeleteMission]
+    );
+
+    // 미션 체크 상태 토글
+    const toggleCheck = useCallback((id: number | string) => {
         setMissions((prev) =>
-            prev.map((m) =>
-                m.id === id ? { ...m, isChecked: !m.isChecked } : m
+            prev.map((mission) =>
+                mission.missionId === id
+                    ? { ...mission, isChecked: !mission.isChecked }
+                    : mission
             )
         );
-    };
+    }, []);
 
-    const updateLabel = (id: number, newLabel: string) => {
-        setMissions((prev) =>
-            prev.map((m) => (m.id === id ? { ...m, label: newLabel } : m))
-        );
-    };
+    // 전체 미션 배열 업데이트
+    const updateMissionOrder = useCallback(
+        (newMissions: MissionItem[]) => {
+            setMissions(newMissions);
+        },
+        [tripId, stampId]
+    );
 
-    const deleteMission = (id: number) => {
-        setMissions((prev) => prev.filter((m) => m.id !== id));
-    };
-
-    const addMission = () => {
-        setMissions((prev) => [
-            ...prev,
-            { id: Date.now(), label: '', isEditing: true, isChecked: false },
-        ]);
-    };
+    // ✅ 미션 추가 API 호출
 
     return {
         missions,
         allChecked,
         checkedCount,
-        toggleEdit,
-        toggleCheck,
+        checkedMissionIds,
         updateLabel,
         deleteMission,
-        addMission,
-        setMissions,
+        toggleCheck,
+        updateMissionOrder,
     };
-}
+};
