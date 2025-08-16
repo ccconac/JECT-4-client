@@ -1,36 +1,32 @@
 import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { deleteMissions } from '../../services/mission/missions';
-import { type ServerMissionItem } from '../../types/mission/MissionItem';
-
-type Ids = { tripId: number; stampId: number; missionId: number };
-
-interface SuccessDelete {
-    success: boolean;
-    status: number;
-    data: null;
-}
+import { deleteMission } from '../../services/mission/missions';
+import type {
+    RequestSuccess,
+    Ids,
+    ServerMissionItem,
+} from '../../types/mission/MissionItem';
 
 const useDeleteMission = () => {
     const queryClient = useQueryClient();
 
     const { mutate, ...rest } = useMutation<
-        SuccessDelete,
+        RequestSuccess,
         Error,
         Ids,
         { previousMissions?: ServerMissionItem[] }
     >({
         mutationFn: async ({ tripId, stampId, missionId }) => {
-            return deleteMissions(tripId, stampId, missionId);
+            return deleteMission(tripId, stampId, missionId);
         },
         onSuccess: (_, variables) => {
             queryClient.invalidateQueries({
                 queryKey: ['missions', variables.tripId, variables.stampId],
             });
         },
-        onError: (error, variables, context) => {
-            toast.error(`미션 삭제 실패: ${error.message}`);
+        onError: (_, variables, context) => {
+            toast.error('미션 삭제에 실패했습니다.');
 
             // 낙관적 업데이트 실패했을 경우 데이터 이전 값으로 복구
             if (context?.previousMissions) {

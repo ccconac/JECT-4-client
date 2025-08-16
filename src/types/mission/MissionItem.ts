@@ -1,3 +1,12 @@
+export interface MissionMutationProps {
+    tripId: number;
+    stampId: number;
+    missionId: number;
+    missionContent: MissionContent;
+}
+
+export type Ids = Omit<MissionMutationProps, 'missionContent'>;
+
 export interface MissionItem {
     missionId: number;
     missionName: string;
@@ -13,4 +22,10 @@ export interface CreateMission {
     name: string;
     memo: string;
     order: number;
+}
+
+export interface RequestSuccess {
+    success: boolean;
+    status: number;
+    data: null;
 }
