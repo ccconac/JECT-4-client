@@ -19,7 +19,7 @@ const WithdrawalPage = () => {
 
     const handleWithdrawal = async () => {
         try {
-            const response = await api.delete('/members/me');
+            await api.delete('/members/me');
             alert('회원 탈퇴가 완료되었습니다.');
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');

@@ -29,7 +29,7 @@ const MainPage = () => {
 
     const [isEditMode, setIsEditMode] = useState(false); // 편집 모드 상태
     const [travelList, setTravelList] = useState<Travel[]>([]);
-    const [page, setPage] = useState(0);
+    const [, setPage] = useState(0);
     const [isFetching, setIsFetching] = useState(false);
     const [hasNext, setHasNext] = useState(true);
     const observer = useRef<IntersectionObserver | null>(null);
@@ -113,7 +113,7 @@ const MainPage = () => {
         // 모달 닫기 먼저
         setIsModalOpen(false);
         try {
-            const response = await api.delete(`/trips/${targetTravelId}`);
+            await api.delete(`/trips/${targetTravelId}`);
 
             setTravelList([]);
             setPage(0);

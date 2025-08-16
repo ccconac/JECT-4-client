@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useAtom } from 'jotai';
 import { signupUserInfoAtom } from '../../../store/signupUserInfoAtom';

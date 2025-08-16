@@ -43,7 +43,7 @@ const SetStampLinearPage = () => {
         }));
 
         try {
-            const response = await api.post('/trips', travelInfo);
+            await api.post('/trips', travelInfo);
 
             console.log('여행 생성 성공');
 

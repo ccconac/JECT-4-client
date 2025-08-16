@@ -56,7 +56,7 @@ const SettingsPage = () => {
     const handleLogout = async () => {
         setIsModalOpen(false);
         try {
-            const response = await api.post('/auth/logout', {
+            await api.post('/auth/logout', {
                 accessToken: localStorage.getItem('accessToken'),
                 refreshToken: localStorage.getItem('refreshToken'),
             });

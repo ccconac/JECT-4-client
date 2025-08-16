@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import api from '@lib/axios';
@@ -63,7 +63,7 @@ const LogPage = () => {
 
     const handleComplete = async () => {
         try {
-            const response = await api.post(
+            await api.post(
                 `trips/${tripId}/daily-goals/${dailyGoal.dailyGoalId}/study-logs`,
                 {
                     totalFocusTimeInMinutes: dailyGoal.elapsedTime,
