@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { type MissionItem } from '../../../../types/mission/MissionItem';
 import useDeleteMission from '../../../../hooks/mission/useDeleteMission';
+import usePatchMission from '../../../../hooks/mission/usePatchMission';
 
 export const useDashboardMissions = (
     tripId: number,
@@ -10,8 +11,13 @@ export const useDashboardMissions = (
         | undefined
 ) => {
     const [missions, setMissions] = useState<MissionItem[]>([]);
+    const [debouncedUpdate, setDebouncedUpdate] = useState<{
+        id: number | string;
+        value: string;
+    } | null>(null);
 
     const { mutateDeleteMission } = useDeleteMission();
+    const { mutatePatchMission } = usePatchMission();
 
     useEffect(() => {
         if (initialFetchedMissions) {
@@ -28,6 +34,29 @@ export const useDashboardMissions = (
             setMissions(convertedMissions);
         }
     }, [initialFetchedMissions]);
+
+    useEffect(() => {
+        if (!debouncedUpdate) return;
+
+        const handler = setTimeout(() => {
+            const { id, value } = debouncedUpdate;
+
+            if (typeof id === 'number') {
+                mutatePatchMission({
+                    tripId,
+                    stampId,
+                    missionId: id,
+                    missionContent: { name: value, memo: '' },
+                });
+            }
+
+            setDebouncedUpdate(null);
+        }, 500);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [debouncedUpdate, tripId, stampId, mutatePatchMission]);
 
     // 모든 미션이 완료되었는지 확인
     const allChecked = useMemo(
@@ -50,19 +79,17 @@ export const useDashboardMissions = (
     );
 
     // 미션 내용 업데이트
-    const updateLabel = useCallback(
-        (id: number | string, value: string) => {
-            setMissions((prev) =>
-                prev.map((mission) =>
-                    mission.missionId === id
-                        ? { ...mission, missionName: value }
-                        : mission
-                )
-            );
-            // ✅ 미션 수정 API 호출
-        },
-        [tripId, stampId]
-    );
+    const updateLabel = useCallback((id: number | string, value: string) => {
+        setMissions((prev) =>
+            prev.map((mission) =>
+                mission.missionId === id
+                    ? { ...mission, missionName: value }
+                    : mission
+            )
+        );
+
+        setDebouncedUpdate({ id, value });
+    }, []);
 
     // 미션 삭제
     const deleteMission = useCallback(
