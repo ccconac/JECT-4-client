@@ -21,6 +21,25 @@ export const fetchMissions = async (
         );
     }
 };
+
+export const deleteMissions = async (
+    tripId: number,
+    stampId: number,
+    missionId: number
+) => {
+    try {
+        const { data } = await api.delete(
+            `/trips/${tripId}/stamps/${stampId}/missions/${missionId}`
+        );
+
+        return data;
+    } catch (error: unknown) {
+        if ((error as any)?.response.status === 404) {
+            throw new Error('미션을 삭제할 수 없습니다.');
+        }
+
+        throw new Error(
+            '미션을 삭제하지 못했습니다. 잠시 후에 다시 시도해 주세요.'
         );
     }
 };
