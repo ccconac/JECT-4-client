@@ -1,20 +1,14 @@
 import api from '../../lib/axios';
-
-export interface MissionItem {
-    missionId: number;
-    missionName: string;
-    missionOrder: number;
-    completed: boolean;
-}
+import { type MissionItem } from '../../types/mission/MissionItem';
 
 export const fetchMissions = async (
     tripId: number,
     stampId: number
-): Promise<MissionItem[]> => {
+): Promise<Omit<MissionItem, 'isEditing' | 'isChecked'>[]> => {
     try {
-        const { data } = await api.get<{ data: MissionItem[] }>(
-            `/trips/${tripId}/stamps/${stampId}/missions`
-        );
+        const { data } = await api.get<{
+            data: Omit<MissionItem, 'isEditing' | 'isChecked'>[];
+        }>(`/trips/${tripId}/stamps/${stampId}/missions`);
 
         return data.data;
     } catch (error: unknown) {

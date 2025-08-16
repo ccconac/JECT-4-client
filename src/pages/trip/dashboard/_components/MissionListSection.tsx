@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import PlusIcon from '../../../../assets/icons/roundedPlus.svg?react';
 import MissionCard from '../_components/MissionCard';
 
-import { type LocalMissionItem } from '../_hooks/useDashboardMissions';
+import { type MissionItem } from '../../../../types/mission/MissionItem';
 
 interface MissionListSectionProps {
-    missions: LocalMissionItem[];
+    missions: MissionItem[];
     allChecked: boolean;
     checkedCount: number;
     isEditMode: boolean;
@@ -15,7 +15,7 @@ interface MissionListSectionProps {
     onUpdateLabel: (id: number, value: string) => void;
     onDelete: (id: number) => void;
     onToggleCheck: (id: number) => void;
-    onUpdateMissionOrder: (newMissions: LocalMissionItem[]) => void;
+    onUpdateMissionOrder: (newMissions: MissionItem[]) => void;
 }
 
 const MissionListSection = ({
@@ -32,7 +32,7 @@ const MissionListSection = ({
     const handleAddMission = useCallback(async () => {
         const newMissionId = Number(uuidv4());
 
-        const newMission: LocalMissionItem = {
+        const newMission: MissionItem = {
             missionId: newMissionId,
             missionName: '',
             missionOrder: missions.length + 1,

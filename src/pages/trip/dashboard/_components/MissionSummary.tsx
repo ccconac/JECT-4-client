@@ -2,10 +2,10 @@ import CalendarButton from '../_components/CalendarButton';
 import SessionGraph from '../_components/SessionGraph/SessionGraph';
 import WriteIcon from '../../../../assets/icons/write.svg?react';
 
-import { type LocalMissionItem } from '../_hooks/useDashboardMissions';
+import { type MissionItem } from '../../../../types/mission/MissionItem';
 
 interface MissionSummaryProps {
-    missions: LocalMissionItem[];
+    missions: MissionItem[];
     checkedCount: number;
 }
 

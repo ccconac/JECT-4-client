@@ -1,31 +1,25 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { type MissionItem as ServerMissionItem } from '../../../../services/mission/missions';
-
-export interface LocalMissionItem {
-    missionId: number;
-    missionName: string;
-    missionOrder: number;
-    completed: boolean;
-    isEditing: boolean;
-    isChecked: boolean;
-}
+import { type MissionItem } from '../../../../types/mission/MissionItem';
 
 export const useDashboardMissions = (
-    initialFetchedMissions?: ServerMissionItem[] | undefined
+    initialFetchedMissions?:
+        | Omit<MissionItem, 'isEditing' | 'isChecked'>[]
+        | undefined
 ) => {
-    const [missions, setMissions] = useState<LocalMissionItem[]>([]);
+    const [missions, setMissions] = useState<MissionItem[]>([]);
 
     useEffect(() => {
         if (initialFetchedMissions) {
-            const convertedMissions: LocalMissionItem[] =
-                initialFetchedMissions.map((m) => ({
+            const convertedMissions: MissionItem[] = initialFetchedMissions.map(
+                (m) => ({
                     missionId: m.missionId,
                     missionName: m.missionName,
                     missionOrder: m.missionOrder,
                     completed: m.completed,
                     isEditing: false,
                     isChecked: false,
-                }));
+                })
+            );
             setMissions(convertedMissions);
         }
     }, [initialFetchedMissions]);
@@ -82,12 +76,9 @@ export const useDashboardMissions = (
     }, []);
 
     // 전체 미션 배열 업데이트
-    const updateMissionOrder = useCallback(
-        (newMissions: LocalMissionItem[]) => {
-            setMissions(newMissions);
-        },
-        []
-    );
+    const updateMissionOrder = useCallback((newMissions: MissionItem[]) => {
+        setMissions(newMissions);
+    }, []);
 
     // ✅ 미션 추가 API 호출
 

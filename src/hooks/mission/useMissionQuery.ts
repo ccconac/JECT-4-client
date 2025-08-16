@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import {
-    fetchMissions,
-    type MissionItem,
-} from '../../services/mission/missions';
+
+import { fetchMissions } from '../../services/mission/missions';
+import { type MissionItem } from '../../types/mission/MissionItem';
 
 const useMissionQuery = (tripId: number, stampId: number) => {
-    return useQuery<MissionItem[], Error>({
+    return useQuery<Omit<MissionItem, 'isEditing' | 'isChecked'>[], Error>({
         queryKey: ['missions', tripId, stampId],
         queryFn: () => {
             if (!tripId && !stampId) {
