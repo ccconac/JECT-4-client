@@ -14,6 +14,10 @@ import useVaildateId from './_hooks/useVaildateId';
 import BackHeader from '../../../components/common/BackHeaderLayout';
 import MainButton from '../../../components/common/button/MainButton';
 import useMissionQuery from '../../../hooks/mission/useMissionQuery';
+import { type DailyGoal } from '../../../types/dailyGoal';
+import useCreateDailyGoal, {
+    type CreateDailyGoalSuccessResponse,
+} from '../../../hooks/dailyGoal/useCreateDailyGoal';
 
 export default function DashboardPage() {
     const [isEditMode, setIsEditMode] = useState(false);
@@ -32,11 +36,27 @@ export default function DashboardPage() {
         isError,
     } = useMissionQuery(id.tripId!, id.stampId!);
 
+    const { mutateCreateDailyGoal } = useCreateDailyGoal({
+        onSuccess: (data: CreateDailyGoalSuccessResponse) => {
+            const dailyGoalId = data?.dailyGoalId;
+
+            navigate('/pomodoro', {
+                state: {
+                    time,
+                    dailyGoalId,
+                },
+            });
+        },
+        onError: () => {
+            alert('데일리 목표 추가를 실패했습니다.');
+        },
+    });
+
     const {
         missions,
         allChecked,
         checkedCount,
-        // checkedMissionIds,
+        checkedMissionIds,
         updateLabel,
         deleteMission,
         toggleCheck,
@@ -46,14 +66,24 @@ export default function DashboardPage() {
     if (isLoading) return <div>미션 목록 로드 중...</div>;
     if (isError) alert('미션 목록을 불러올 수 없습니다.');
 
-    // console.log('체크 완료된 거:', checkedMissionIds);
-
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const handleConfirm = () => {
         setOpen(false);
-        navigate('/pomodoro', { state: { time } });
+
+        const payloadDailyGoal: DailyGoal = {
+            pomodoro: {
+                focusDurationInMinute: Number(time.minute),
+                focusSessionCount: Number(time.session),
+            },
+            missionIds: checkedMissionIds,
+        };
+
+        mutateCreateDailyGoal({
+            tripId: id.tripId!,
+            dailyGoal: payloadDailyGoal,
+        });
     };
 
     return (
