@@ -9,7 +9,8 @@ import MissionList from './MissionList';
 import api from '@lib/axios';
 
 import { useSetAtom, useAtomValue } from 'jotai';
-import { travelInfoAtom, Stamp } from '@store/travelInfoAtom';
+import { travelInfoAtom } from '@store/travelInfoAtom';
+import type { Stamp } from '@store/travelInfoAtom';
 
 interface Item {
     id: string;

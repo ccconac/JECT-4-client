@@ -9,7 +9,8 @@ import { getTodayDate } from '../../../../utils/date';
 import CalendarIcon from '../../../../assets/icons/calendar_icon.svg';
 
 import { useSetAtom, useAtomValue } from 'jotai';
-import { travelInfoAtom, TravelInfo } from '@store/travelInfoAtom';
+import { travelInfoAtom } from '@store/travelInfoAtom';
+import type { TravelInfo } from '@store/travelInfoAtom';
 
 interface SetTravelNameFormProps {
     travelType: 'course' | 'explore';
