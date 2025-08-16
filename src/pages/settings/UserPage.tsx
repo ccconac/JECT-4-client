@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import BackHeader from '../../components/common/BackHeaderLayout';
 //import PhotoIcon from '../../assets/icons/photo.svg?react';
 import ClearableInput from '../../components/common/input/ClearableInput';
@@ -7,7 +8,10 @@ import MainButton from '../../components/common/button/MainButton';
 import { useAtom } from 'jotai';
 import { memberNameAtom, fetchMemberNameAtom } from '@store/userInfoAtom';
 
+import api from '@lib/axios';
+
 const UserPage = () => {
+    const navigate = useNavigate();
     // 유저이름 불러오기
     const [userName] = useAtom(memberNameAtom);
     const [, fetchMemberName] = useAtom(fetchMemberNameAtom);
@@ -16,6 +20,20 @@ const UserPage = () => {
         fetchMemberName();
     }, [fetchMemberName]);
     const [nickname, setNickname] = useState(userName || '');
+
+    const handleSave = async () => {
+        try {
+            const response = await api.patch('/members/me', {
+                nickname: nickname,
+            });
+            fetchMemberName(nickname);
+            console.log('프로필 저장 성공', response.data);
+            alert('프로필이 저장되었습니다.');
+            navigate('/settings', { replace: true });
+        } catch (error) {
+            console.warn('프로필 저장 실패', error);
+        }
+    };
 
     return (
         <div>
@@ -44,9 +62,7 @@ const UserPage = () => {
                 <MainButton
                     colorClass="bg-text-sub"
                     disabled={!nickname}
-                    onClick={() => {
-                        console.log('프로필 저장 클릭');
-                    }}
+                    onClick={handleSave}
                 >
                     저장
                 </MainButton>

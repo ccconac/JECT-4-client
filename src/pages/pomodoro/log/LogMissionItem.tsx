@@ -1,13 +1,28 @@
-const LogMissionItem = () => {
+interface LogMissionItemProps {
+    id: number;
+    name: string;
+    memo?: string;
+    checked: boolean;
+    onToggle: (id: number) => void;
+}
+
+const LogMissionItem = ({
+    id,
+    name,
+    checked,
+    onToggle,
+}: LogMissionItemProps) => {
     return (
         <div className="flex items-center">
             <input
-                id="chk"
+                id={`mission-${id}`}
                 type="checkbox"
                 className="accent-text-sub h-5 w-5"
+                checked={checked}
+                onChange={() => onToggle(id)}
             />
-            <label htmlFor="chk" className="ml-4">
-                유형연습 Q8-10 복습
+            <label htmlFor={`mission-${id}`} className="ml-4">
+                {name}
             </label>
         </div>
     );

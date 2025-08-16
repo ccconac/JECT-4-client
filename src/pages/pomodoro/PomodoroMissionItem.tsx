@@ -1,13 +1,23 @@
-const PomodoroMissionItem = () => {
+type missionProps = {
+    id: number;
+    name: string;
+    memo: string;
+    checked: boolean;
+    onToggle: () => void;
+};
+
+const PomodoroMissionItem = ({ id, name, checked, onToggle }: missionProps) => {
     return (
         <div className="flex items-center">
             <input
-                id="chk"
+                id={String(id)}
                 type="checkbox"
+                checked={checked}
+                onChange={onToggle}
                 className="accent-text-sub h-5 w-5"
             />
-            <label htmlFor="chk" className="ml-4">
-                유형연습 Q8-10 복습
+            <label htmlFor={String(id)} className="ml-4">
+                {name}
             </label>
         </div>
     );

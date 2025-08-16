@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '@lib/axios';
 import ArrowIcon from '../../assets/icons/arrow.svg?react';
 import StatCard from './StatCard';
 import SettingList from './SettingList';
@@ -9,12 +9,6 @@ import ConfirmModal from '../../components/common/ConfirmModal';
 import { useAtom } from 'jotai';
 import { memberNameAtom, fetchMemberNameAtom } from '@store/userInfoAtom';
 
-const stats = [
-    { label: '탐험형', count: 8 },
-    { label: '코스형', count: 8 },
-    { label: '기록', count: 8 },
-];
-
 const SettingsPage = () => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,15 +16,47 @@ const SettingsPage = () => {
     // 유저이름 불러오기
     const [userName] = useAtom(memberNameAtom);
     const [, fetchMemberName] = useAtom(fetchMemberNameAtom);
+    const [stats, setStats] = useState([
+        { label: '탐험형', count: 0 },
+        { label: '코스형', count: 0 },
+        { label: '기록', count: 0 },
+    ]);
 
     useEffect(() => {
         fetchMemberName();
     }, [fetchMemberName]);
 
+    useEffect(() => {
+        const getUserInfo = async () => {
+            try {
+                const response = await api.get('/members/me');
+
+                setStats([
+                    {
+                        label: '탐험형',
+                        count: response.data.data.exploreTripCount,
+                    },
+                    {
+                        label: '코스형',
+                        count: response.data.data.courseTripCount,
+                    },
+                    {
+                        label: '기록',
+                        count: response.data.data.studyLogCount,
+                    },
+                ]);
+            } catch (error) {
+                console.warn('데이터 불러오기 실패', error);
+            }
+        };
+        getUserInfo();
+        fetchMemberName();
+    }, []);
+
     const handleLogout = async () => {
         setIsModalOpen(false);
         try {
-            const response = await axios.post('/api/auth/logout', {
+            const response = await api.post('/auth/logout', {
                 accessToken: localStorage.getItem('accessToken'),
                 refreshToken: localStorage.getItem('refreshToken'),
             });
