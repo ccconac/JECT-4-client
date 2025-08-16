@@ -6,3 +6,5 @@ export interface MissionItem {
     isEditing: boolean;
     isChecked: boolean;
 }
+
+export type ServerMissionItem = Omit<MissionItem, 'isEditing' | 'isChecked'>;
